@@ -30,8 +30,24 @@ RUN yum -y install httpd php php-mysql php-gd libjpeg* php-imap php-ldap php-odb
 RUN sed -i 's/Listen 80/Listen 8080/g' /etc/httpd/conf/httpd.conf
 
 VOLUME ["/data"]
+
+#nginx配置文件
+RUN cp -p /etc/nginx/nginx.conf  /etc/nginx/nginx.conf.bak && \
+	rm -rf cp -p /etc/nginx/nginx.conf	&& \
+	ln -s /data/conf/nginx.conf /etc/nginx/
+ADD nginx.conf /data/conf/nginx.conf
+
+RUN cp -p /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.bak && \
+	rm -rf /etc/nginx/conf.d/default.conf	
+ADD nginx_main.conf /data/conf/sites-available/nginx_main.conf
+
+
+
+
+
+
 #重启nginx和httpd
 ENTRYPOINT ["/etc/init.d/nginx","reload"]
-ENTRYPOINT ["/etc/init.d/httpd","reload"]
+#ENTRYPOINT ["/etc/init.d/httpd","reload"]
 
 EXPOSE 80 443 22
