@@ -48,18 +48,18 @@ RUN cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak && \
 	mv /etc/httpd/conf/httpd.conf /data/conf/ && \
 	ln -s /data/conf/httpd.conf /etc/httpd/conf/
 
-RUN sed -i 's/Listen 80/Listen 8080/g' /data/conf/httpd.conf
+#RUN sed -i 's/Listen 80/Listen 8080/g' /data/conf/httpd.conf
 	
-RUN sed -i 's/ServerTokens OS/ServerTokens Prod/
-s/ServerSignature On/ServerSignature Off/
-s/Options Indexes FollowSymLinks/Options FollowSymLinks/
-s/Options Indexes MultiViews FollowSymLinks/Options MultiViews FollowSymLinks/
-s/DirectoryIndex index.html/DirectoryIndex index.html index.php/
-s/KeepAlive Off/KeepAlive On/
-s/MaxKeepAliveRequests 100/MaxKeepAliveRequests 1000/
-s/User apache/User www/
-s/Group apache/Group www/
-s#/var/www/html#/data/wwwroot/web#' /data/conf/httpd.conf
+#RUN sed -i 's/ServerTokens OS/ServerTokens Prod/
+#s/ServerSignature On/ServerSignature Off/
+#s/Options Indexes FollowSymLinks/Options FollowSymLinks/
+#s/Options Indexes MultiViews FollowSymLinks/Options MultiViews FollowSymLinks/
+#s/DirectoryIndex index.html/DirectoryIndex index.html index.php/
+#s/KeepAlive Off/KeepAlive On/
+#s/MaxKeepAliveRequests 100/MaxKeepAliveRequests 1000/
+#s/User apache/User www/
+#s/Group apache/Group www/
+#s#/var/www/html#/data/wwwroot/web#' /data/conf/httpd.conf
 
 ADD apache_main.conf /data/conf/sites-available/apache_main.conf
 
