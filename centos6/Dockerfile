@@ -31,27 +31,6 @@ RUN yum -y install httpd php php-mysql php-gd libjpeg* php-imap php-ldap php-odb
 RUN groupadd www && \
 useradd -g www www
 
-VOLUME ["/data"]
-
-#nginx配置文件
-RUN cp -p /etc/nginx/nginx.conf  /etc/nginx/nginx.conf.bak && \
-	rm -rf /etc/nginx/nginx.conf	&& \
-	ln -s /data/conf/nginx.conf /etc/nginx/nginx.conf
-
-RUN cp -p /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.bak && \
-	rm -rf /etc/nginx/conf.d/default.conf
-
-
-##httpd配置文件
-RUN cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak && \	
-	ln -s /data/conf/httpd.conf /etc/httpd/conf/httpd.conf
-
-##php配置文件
-RUN cp -p /etc/php.ini /etc/php.ini.bak && \
-  ln -s /data/conf/php.ini /etc/php.ini
-
-
-
 #重启nginx和httpd
 #ENTRYPOINT ["/etc/init.d/nginx","reload"]
 #ENTRYPOINT ["/etc/init.d/httpd","reload"]
