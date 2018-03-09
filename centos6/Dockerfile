@@ -36,7 +36,7 @@ VOLUME ["/data"]
 #nginx配置文件
 RUN cp -p /etc/nginx/nginx.conf  /etc/nginx/nginx.conf.bak && \
 	rm -rf /etc/nginx/nginx.conf	&& \
-	ln -s /data/conf/nginx.conf /etc/nginx/
+	ln -s /data/conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN cp -p /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.bak && \
 	rm -rf /etc/nginx/conf.d/default.conf
@@ -45,12 +45,12 @@ RUN cp -p /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.bak && 
 ##httpd配置文件
 RUN cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak && \
 	mv /etc/httpd/conf/httpd.conf /data/conf/ && \
-	ln -s /data/conf/httpd.conf /etc/httpd/conf/
+	ln -s /data/conf/httpd.conf /etc/httpd/conf/httpd.conf
 
 ##php配置文件
 RUN cp -p /etc/php.ini /etc/php.ini.bak && \
   mv /etc/php.ini /data/conf/ && \
-  ln -s /data/conf/php.ini /etc/
+  ln -s /data/conf/php.ini /etc/php.ini
 
 
 
