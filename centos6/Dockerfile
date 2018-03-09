@@ -36,3 +36,14 @@ useradd -g www www
 #ENTRYPOINT ["/etc/init.d/httpd","reload"]
 
 EXPOSE 80 443 8080
+
+# 复制docker-entrypoint.sh脚本到/usr/local/bin目录下
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# 当执行docker run shadowsocks就会执行docker-entrypoint.sh脚本
+ENTRYPOINT ["docker-entrypoint.sh"]
+# 执行run.sh文件
+CMD ["nginx"]
+
+
+
