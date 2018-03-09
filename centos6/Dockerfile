@@ -33,7 +33,7 @@ VOLUME ["/data"]
 
 #nginx配置文件
 RUN cp -p /etc/nginx/nginx.conf  /etc/nginx/nginx.conf.bak && \
-	rm -rf cp -p /etc/nginx/nginx.conf	&& \
+	rm -rf /etc/nginx/nginx.conf	&& \
 	ln -s /data/conf/nginx.conf /etc/nginx/
 ADD nginx.conf /data/conf/nginx.conf
 
@@ -41,6 +41,7 @@ RUN cp -p /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf.bak && 
 	rm -rf /etc/nginx/conf.d/default.conf	
 ADD nginx_main.conf /data/conf/sites-available/nginx_main.conf
 
+##httpd配置文件
 
 
 
