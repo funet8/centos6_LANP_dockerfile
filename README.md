@@ -17,11 +17,11 @@ git clone https://github.com/funet8/centos6_LANP_dockerfile.git
 ```
 cd centos6_LANP_dockerfile/centos6
 构建镜像:
-docker build -t  funet8/centos6LNAP:6.9 .
+docker build -t  funet8/centos_lnap:6.9 .
 ```
 3.启动容器：
 ```
-docker run -itd --name centos6LNAP --restart always -p 80:80 -p 443:443 -v /data/:/data/  funet8/centos6LNAP:6.9
+docker run -itd --name centos6LNAP --restart always -p 80:80 -p 443:443 -v /data/:/data/  funet8/centos:6.9
 ```
 
 

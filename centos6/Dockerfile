@@ -26,6 +26,8 @@ RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos
 	yum -y install nginx
 #安装httpd,php和其他
 RUN yum -y install httpd php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt	
+##修改httpd默认端口
+RUN sed -i 's/Listen 80/Listen 8080/g' /etc/httpd/conf/httpd.conf
 
 VOLUME ["/data"]
 #重启nginx和httpd
