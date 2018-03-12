@@ -28,16 +28,37 @@ RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos
 #安装httpd,php和其他
 RUN yum -y install httpd php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt
 
-RUN groupadd www && \
+RUN groupadd www && \ 
 useradd -g www www
 
-#重启nginx和httpd
-#ENTRYPOINT ["/etc/init.d/nginx","reload"]
-#ENTRYPOINT ["/etc/init.d/httpd","reload"]
+ADD start_nginx_apache.sh /opt/start_nginx_apache.sh
+RUN chmod +x /opt/start_nginx_apache.sh
+#CMD ["/bin/bash","/opt/start_nginx_apache.sh"]
+
+VOLUME ["/data"]
+RUN mkdir -p /data/wwwroot/ /data/conf/
+RUN chown www.www -R /data/wwwroot/ /data/conf/ /var/log/nginx/ /var/run/ /etc/httpd/logs/ /var/lock/subsys/
+
+#指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户
+#USER www
 
 EXPOSE 80 443 8080
 
-CMD  ["/etc/init.d/nginx","start"]
+##由于权限问题，nginx和apache启动不起来
+#nginx无法启动
+#ENTRYPOINT ["/etc/init.d/nginx","reload"]
+#ENTRYPOINT ["/etc/init.d/httpd","reload"]
+#nginx无法启动
+#CMD  ["/etc/init.d/nginx","start"]
+#可以生效
+#CMD ["nginx", "-g","daemon off;"]
+
+##httpd无法启动
+##CMD ["httpd", "-g","daemon off;"]
+
+##httpd无法启动
+#ENTRYPOINT ["/etc/init.d/httpd","restart"]
+#CMD ["/usr/sbin/httpd"]
 
 
 
