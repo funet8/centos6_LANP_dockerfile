@@ -1,4 +1,4 @@
 #!/bin/bash
 
-/etc/init.d/nginx restart
-/etc/init.d/httpd restart
+sudo /etc/init.d/nginx start
+sudo /etc/init.d/httpd start

@@ -33,11 +33,10 @@ useradd -g www www
 
 ADD start_nginx_apache.sh /opt/start_nginx_apache.sh
 RUN chmod +x /opt/start_nginx_apache.sh
-#CMD ["/bin/bash","/opt/start_nginx_apache.sh"]
+CMD ["/bin/bash","/opt/start_nginx_apache.sh"]
 
-VOLUME ["/data"]
-RUN mkdir -p /data/wwwroot/ /data/conf/
-RUN chown www.www -R /data/wwwroot/ /data/conf/ /var/log/nginx/ /var/run/ /etc/httpd/logs/ /var/lock/subsys/
+#允许www使用sudo
+RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers 
 
 #指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户
 #USER www
