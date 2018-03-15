@@ -22,16 +22,6 @@ RUN yum install -y curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-utils 
 #卸载nginx httpd php
 RUN yum -y remove nginx httpd* php*
 
-#安装supervisor并且add配置文件
-RUN pip install supervisor
-ADD supervisord.conf /etc/supervisord.conf
-
-RUN mkdir -p /etc/supervisor.conf.d && \
-    mkdir -p /var/log/supervisor
-	
-ADD	supervisor_nginx.conf /etc/supervisor.conf.d/supervisor_nginx.conf
-ADD	supervisor_apache.conf /etc/supervisor.conf.d/supervisor_apache.conf
-
 #安装nginx
 RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm && \
 	yum -y install nginx
@@ -49,29 +39,18 @@ RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 EXPOSE 80 443 8080
 
-##由于权限问题，nginx和apache启动不起来
-#nginx无法启动
-#ENTRYPOINT ["/etc/init.d/nginx","reload"]
-#ENTRYPOINT ["/etc/init.d/httpd","reload"]
-#nginx无法启动
-#CMD  ["/etc/init.d/nginx","start"]
-#可以生效
-#CMD ["nginx", "-g","daemon off;"]
+#安装supervisor并且add配置文件
+RUN pip install supervisor
+ADD supervisord.conf /etc/supervisord.conf
 
-##httpd无法启动
-##CMD ["httpd", "-g","daemon off;"]
+RUN mkdir -p /etc/supervisor.conf.d && \
+    mkdir -p /var/log/supervisor
 
-##httpd无法启动
-#ENTRYPOINT ["/etc/init.d/httpd","restart"]
-#CMD ["/usr/sbin/httpd"]
+ADD supervisord.conf /etc/supervisord.conf	
+ADD	supervisor_nginx.conf /etc/supervisor.conf.d/supervisor_nginx.conf
+ADD	supervisor_apache.conf /etc/supervisor.conf.d/supervisor_apache.conf
 
-#ADD start_nginx_apache.sh /opt/start_nginx_apache.sh
-#RUN chmod +x /opt/start_nginx_apache.sh
-#CMD ["/usr/bin/sudo","/opt/start_nginx_apache.sh"]
-#CMD "/usr/bin/sudo","/opt/start_nginx_apache.sh"
-#CMD ["nginx"]
-#CMD  ["echo","hello world"]
-#ENTRYPOINT ["sudo","/etc/init.d/httpd","start"]
+CMD ["/usr/bin/supervisord -c /etc/supervisord.conf"]
 
-ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+
 
