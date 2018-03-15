@@ -44,11 +44,6 @@ RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noar
 RUN yum -y install supervisor
 ADD supervisord.conf /etc/supervisord.conf
 
-RUN mkdir -p /etc/supervisor.conf.d && \
-    mkdir -p /var/log/supervisor
-ADD	supervisor_nginx.conf /etc/supervisor.conf.d/supervisor_nginx.conf
-ADD	supervisor_apache.conf /etc/supervisor.conf.d/supervisor_apache.conf
-
 CMD ["/usr/bin/supervisord -c /etc/supervisord.conf"]
 
 
