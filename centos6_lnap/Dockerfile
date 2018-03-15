@@ -44,7 +44,8 @@ RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noar
 RUN yum -y install supervisor
 ADD supervisord.conf /etc/supervisord.conf
 
-CMD ["/usr/bin/supervisord -c /etc/supervisord.conf"]
+#CMD ["/usr/bin/supervisord -c /etc/supervisord.conf"]
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
 
 
