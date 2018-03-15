@@ -22,6 +22,16 @@ RUN yum install -y curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-utils 
 #卸载nginx httpd php
 RUN yum -y remove nginx httpd* php*
 
+#安装supervisor并且add配置文件
+RUN pip install supervisor
+ADD supervisord.conf /etc/supervisord.conf
+
+RUN mkdir -p /etc/supervisor.conf.d && \
+    mkdir -p /var/log/supervisor
+	
+ADD	supervisor_nginx.conf /etc/supervisor.conf.d/supervisor_nginx.conf
+ADD	supervisor_apache.conf /etc/supervisor.conf.d/supervisor_apache.conf
+
 #安装nginx
 RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm && \
 	yum -y install nginx
@@ -30,10 +40,6 @@ RUN yum -y install httpd php php-mysql php-gd libjpeg* php-imap php-ldap php-odb
 
 RUN groupadd www && \ 
 useradd -g www www
-
-ADD start_nginx_apache.sh /opt/start_nginx_apache.sh
-RUN chmod +x /opt/start_nginx_apache.sh
-CMD ["/bin/bash","/opt/start_nginx_apache.sh"]
 
 #允许www使用sudo
 RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers 
@@ -59,5 +65,13 @@ EXPOSE 80 443 8080
 #ENTRYPOINT ["/etc/init.d/httpd","restart"]
 #CMD ["/usr/sbin/httpd"]
 
+#ADD start_nginx_apache.sh /opt/start_nginx_apache.sh
+#RUN chmod +x /opt/start_nginx_apache.sh
+#CMD ["/usr/bin/sudo","/opt/start_nginx_apache.sh"]
+#CMD "/usr/bin/sudo","/opt/start_nginx_apache.sh"
+#CMD ["nginx"]
+#CMD  ["echo","hello world"]
+#ENTRYPOINT ["sudo","/etc/init.d/httpd","start"]
 
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
