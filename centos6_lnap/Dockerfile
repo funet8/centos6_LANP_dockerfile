@@ -39,14 +39,13 @@ RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 
 EXPOSE 80 443 8080
 
-#安装supervisor并且add配置文件
-RUN pip install supervisor
+#安装supervisor并且添加配置文件
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+RUN yum -y install supervisor
 ADD supervisord.conf /etc/supervisord.conf
 
 RUN mkdir -p /etc/supervisor.conf.d && \
     mkdir -p /var/log/supervisor
-
-ADD supervisord.conf /etc/supervisord.conf	
 ADD	supervisor_nginx.conf /etc/supervisor.conf.d/supervisor_nginx.conf
 ADD	supervisor_apache.conf /etc/supervisor.conf.d/supervisor_apache.conf
 
