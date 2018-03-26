@@ -13,6 +13,7 @@ RUN rpm --import http://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 
 RUN yum clean all && \ yum makecache
 RUN yum install -y MariaDB-server MariaDB-client && \ chkconfig --levels 235 mysql on
+RUN mkdir -p /var/log/mysql/ && \ chmod mysql.mysql -R /var/log/mysql/
 
 EXPOSE 3306
 
