@@ -20,9 +20,26 @@ docker build -t  funet8/centos:6.9 .
 ```
 ## 构建centos6_MariaDB
 ```
-docker run -itd --name centos6  funet8/centos:6.9
-```
 
+docker build -t  funet8/centos6mariadb .
+
+docker run -itd --name centos6MariaDB  funet8/centos6mariadb
+
+docker run -itd --name centos6MariaDBv1 \
+--restart always \
+-p 61950:3306 \
+-v /data/docker/mysql_conf/my.cnf:/etc/my.conf  \
+-v /data/docker/mysql_conf/mysql_slowQuery.log:/var/log/mysql/mysql_slowQuery.log \
+-v /data/docker/mysql_docker:/var/lib/mysql \
+funet8/centos6mariadb
+```
+进入mysql中创建远程登录用户，并且删除默认root用户
+```
+mysql>CREATE USER 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh94JhYY303bb';
+mysql>GRANT  all privileges ON * . * TO 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh94JhYY303bb';
+mysql>GRANT ALL PRIVILEGES ON * . * TO 'dbuser_lxx'@'%' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+mysql>flush privileges;
+```
 
 
 

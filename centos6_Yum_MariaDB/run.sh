@@ -1,13 +1,17 @@
 #!/bin/bash
-docker build -t  funet8/centos_lnap:6.9.1 .
 
-#启动容器
-#docker run -itd --name centos6lnap --restart always -p 80:80 -p 443:443 -v /data/:/data/ -v /data/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/conf/httpd.conf:/etc/httpd/conf/httpd.conf -v /data/conf/php.ini:/etc/php.ini  funet8/centos_lnap:6.9.1
+#解压配置文件和数据库目录
+tar -zxf mysql_docker.tar.gz -C /data/docker/
 
-#进入容器
-#docker exec -it centos6lnap /bin/bash
 
-#删除容器和镜像
-#
-#docker rm -f centos6lnap
-#docker rmi funet8/centos_lnap:6.9.1
+#构建镜像
+docker build -t  funet8/centos6mariadb .
+
+#运行docker
+docker run -itd --name centos6MariaDBv1 \
+--restart always \
+-p 61950:3306 \
+-v /data/docker/mysql_conf/my.cnf:/etc/my.conf  \
+-v /data/docker/mysql_conf/mysql_slowQuery.log:/var/log/mysql/mysql_slowQuery.log \
+-v /data/docker/mysql_docker:/var/lib/mysql \
+funet8/centos6mariadb
