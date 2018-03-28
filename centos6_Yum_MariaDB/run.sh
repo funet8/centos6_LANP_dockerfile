@@ -15,3 +15,7 @@ docker run -itd --name centos6MariaDBv1 \
 -v /data/docker/mysql_conf/mysql_slowQuery.log:/var/log/mysql/mysql_slowQuery.log \
 -v /data/docker/mysql_docker:/var/lib/mysql \
 funet8/centos6mariadb
+
+#mysql用户密码：
+#dbuser_lxx
+#Yxa7dvKh94JhYY303bb
