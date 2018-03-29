@@ -21,7 +21,7 @@ RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.
 	rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
 ADD remi.repo /etc/yum.repos.d/remi.repo
-RUN yum --enablerepo=remi,remi-php56 install php-fpm php-common php-devel php-mysqlnd php-mbstring php-mcrypt
+RUN yum -y install --enablerepo=remi,remi-php56 install php-fpm php-common php-devel php-mysqlnd php-mbstring php-mcrypt
 
 #安装phpreids扩展
 

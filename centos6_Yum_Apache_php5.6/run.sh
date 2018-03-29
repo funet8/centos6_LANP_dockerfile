@@ -1,13 +1,14 @@
 #!/bin/bash
-docker build -t  funet8/centos_lnap:6.9.1 .
+mkdir -p /data/docker/httpd/conf.d/
+cp httpd.conf php.ini /data/docker/httpd/
+cp apache_main.conf /data/docker/httpd/conf.d/
+
+docker build -t  funet8/centos6_httpd_php56:v1 .
 
 #启动容器
-#docker run -itd --name centos6lnap --restart always -p 80:80 -p 443:443 -v /data/:/data/ -v /data/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/conf/httpd.conf:/etc/httpd/conf/httpd.conf -v /data/conf/php.ini:/etc/php.ini  funet8/centos_lnap:6.9.1
-
-#进入容器
-#docker exec -it centos6lnap /bin/bash
-
-#删除容器和镜像
-#
-#docker rm -f centos6lnap
-#docker rmi funet8/centos_lnap:6.9.1
+docker run -itd --name centos6_httpd_php56 \
+--restart always -p 8080:8080 \
+-v /data/docker/httpd/httpd.conf:/etc/httpd/conf/httpd.conf \
+-v /data/docker/httpd/php.ini:/etc/php.ini  \
+-v /data/docker/httpd/conf.d/:/etc/httpd/conf.d/  \
+funet8/centos6_httpd_php56:v1
