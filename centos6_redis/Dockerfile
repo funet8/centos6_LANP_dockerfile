@@ -9,6 +9,7 @@
 #port 6379
 #daemonize yes  			# 使Redis以守护进程模式运行
 #dir /data/docker/redis/  	# 设置持久化文件存放的位置
+# /data/wwwroot/log/ 		# redis 日志
 
 #FROM 		daocloud.io/centos:6.9
 #FROM 		funet8/centos:6.9 .
@@ -30,7 +31,8 @@ RUN yum -y install tcl gcc gcc-c++ libstdc++-devel && \
 	make install
 #2.配置redis
 RUN cp /home/data/software/redis-stable/utils/redis_init_script /etc/init.d/redis && \
-	mkdir -p /data/docker/redis/
+	mkdir -p /data/docker/redis/ && \
+	mkdir -p /data/wwwroot/log/
 	
 ADD 6379.conf /etc/redis/6379.conf
 	
