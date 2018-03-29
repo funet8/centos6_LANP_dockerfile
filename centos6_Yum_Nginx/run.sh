@@ -14,4 +14,5 @@ docker run -itd --name centos6nginx \
 -v /data/docker/nginx_conf/nginx.conf:/etc/nginx/nginx.conf \
 -v /data/docker/nginx_conf/nginx_main.conf:/etc/nginx/conf.d/nginx_main.conf \
 -v /data/wwwroot/log/nginx/:/var/log/nginx/  \
+-v /data/wwwroot/:/data/wwwroot/ \
 funet8/centos6nginx:v1
