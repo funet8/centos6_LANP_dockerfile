@@ -6,7 +6,8 @@
 # LNAP
 
 #FROM 		daocloud.io/centos:6.9
-FROM 		funet8/centos:6.9 .
+#FROM 		funet8/centos:6.9 .
+FROM 		registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-base:v1
 MAINTAINER star  <funet8@163.com>
 
 ENV TZ "Asia/Shanghai"
