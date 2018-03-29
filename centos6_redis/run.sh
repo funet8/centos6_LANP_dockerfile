@@ -14,4 +14,4 @@ docker run -itd --name dockerredis \
 -v /data/docker/redis/6379.conf:/etc/redis/6379.conf \
 -v /data/docker/redis/dump.rdb:/data/docker/redis/dump.rdb \
 -v /data/wwwroot/:/data/wwwroot/ \
-docker build -t  funet8/centos6redis:v1 .
+funet8/centos6redis:v1
