@@ -20,24 +20,25 @@ RUN yum -y install httpd php-mysql php-gd libjpeg* php-imap php-ldap php-odbc ph
 RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
 ADD remi.repo /etc/yum.repos.d/remi.repo
-RUN yum -y install --enablerepo=remi,remi-php56 install php-fpm php-common php-devel php-mysqlnd php-mbstring php-mcrypt
+RUN yum --enablerepo=remi,remi-php56 install -y php-fpm php-common php-devel php-mysqlnd php-mbstring php-mcrypt
 
 #安装phpreids扩展
 
 #安装memcached
 RUN yum install -y libmemcached
-ADD php-ext/memcache-3.0.8.tgz /tmp/memcache-3.0.8.tgz
+COPY php-ext/memcache-3.0.8.tgz /tmp/
 RUN tar zxf /tmp/memcache-3.0.8.tgz -C /tmp/ && \
 	cd /tmp/memcache-3.0.8 && \
 	/usr/bin/phpize && \
 	./configure --enable-memcache --with-php-config=/usr/bin/php-config --with-zlib-dir && \
 	make && make install && \
-	make test \
+	make test
 
 #安装redis扩展
-ADD php-ext/phpredis.tar.gz /tmp/phpredis.tar.gz
+COPY php-ext/phpredis.tar.gz /tmp/
 RUN tar zxf /tmp/phpredis.tar.gz -C /tmp/ && \
 	cd /tmp/phpredis &&\
+	/usr/bin/phpize &&\
 	./configure && \
 	make && make install &&\
 	make test
