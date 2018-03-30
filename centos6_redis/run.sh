@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#创建文件夹、复制nginx配置文件
+#创建文件夹、复制redis配置文件
 mkdir -p /data/docker/redis/
 cp 6379.conf /data/docker/redis/
 
