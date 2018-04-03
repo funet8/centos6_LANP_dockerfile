@@ -4,7 +4,7 @@
 wget http://www.funet8.com/img/linux/mysql_docker.tar.gz && tar -zxf mysql_docker.tar.gz -C /data/docker/
 
 #使用阿里云镜像
-docker run -itd --name centos6base  registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
+#docker run -itd --name centos6base  registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
 
 #运行docker
 docker run -itd --name centos6MariaDBv1 \

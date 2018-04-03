@@ -21,6 +21,11 @@ RUN yum install -y MariaDB-server MariaDB-client && \
 RUN mkdir -p /var/log/mysql/ && \ 
 	chown mysql.mysql -R /var/log/mysql/
 
+#设置密码	
+#RUN mysql -e "grant all privileges on *.* to 'root'@'%' identified by '1234';"
+#RUN mysql -e "grant all privileges on *.* to 'root'@'localhost' identified by '1234';"
+EXPOSE 3306
+	
 EXPOSE 3306
 
 ADD conf/my.cnf /etc/my.cnf
