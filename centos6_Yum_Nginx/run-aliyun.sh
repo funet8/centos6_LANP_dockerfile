@@ -1,15 +1,11 @@
 #!/bin/bash
-
 #创建文件夹、复制nginx配置文件
-#mkdir -p /data/docker/nginx_conf/conf.d/
-#cp nginx.conf /data/docker/nginx_conf/
-#cp nginx_main.conf /data/docker/nginx_conf/conf.d/
 
-wget http://www.funet8.com/img/linux/nginx_docker.tar.gz && tar -zxf nginx_docker.tar.gz -C /data/docker/
-
-
-#构建镜像
-#docker build -t  funet8/centos6nginx:v1 .
+mkdir -p /data/docker/nginx_conf/conf.d/
+cd /data/docker/nginx_conf/
+wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Nginx/nginx.conf
+cd /data/docker/nginx_conf/conf.d/
+wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Nginx/nginx_main.conf
 
 #启动容器
 docker run -itd --name dockernginx \

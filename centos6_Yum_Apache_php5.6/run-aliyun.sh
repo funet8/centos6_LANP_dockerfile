@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#mkdir -p /data/docker/httpd/conf.d/
-#cp httpd.conf php.ini /data/docker/httpd/
-#cp apache_main.conf /data/docker/httpd/conf.d/
+mkdir -p /data/docker/httpd/conf.d/
+cd /data/docker/httpd/
+wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/httpd.conf
+wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/php.ini
 
-wget http://www.funet8.com/img/linux/apache_docker.tar.gz && tar -zxf apache_docker.tar.gz -C /data/docker/
+cd /data/docker/httpd/conf.d/
+wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/apache_main.conf
 
-#docker build -t  funet8/centos6_httpd_php56:v1 .
-
-#启动容器
+#启动容器 --link链接mysql容器
 docker run -itd --name centos6_httpd_php56 \
 --link=centos6MariaDBv1:centos6MariaDBv1 \
 --restart always \
