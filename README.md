@@ -7,12 +7,20 @@
 | A | apache2.2 |
 | P | php5.3 |
 
+# 使用shell脚本构建lnmap
+```
+run-aliyun-mysql-apache-nginx.sh
+
+```
+
+
 ## 一、创建主镜像
 克隆项目
 ```
 yum install git
 git clone https://github.com/funet8/centos6_LANP_dockerfile.git
 ```
+
 ```
 cd centos6_LANP_dockerfile/centos6_v2/
 sh build_docker_centos6.sh
