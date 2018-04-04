@@ -21,6 +21,7 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 
 ADD remi.repo /etc/yum.repos.d/remi.repo
 RUN yum --enablerepo=remi,remi-php56 install -y php-fpm php-common php-devel php-mysqlnd php-mbstring php-mcrypt
+RUN chmod 777 /var/lib/php/session -R
 
 #安装phpreids扩展
 
@@ -58,6 +59,7 @@ useradd -g www www
 RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers 
 
 EXPOSE 8080
+ADD supervisord.conf /etc/supervisord.conf
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
