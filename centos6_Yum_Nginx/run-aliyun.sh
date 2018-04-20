@@ -3,12 +3,12 @@
 
 mkdir -p /data/docker/nginx_conf/conf.d/
 cd /data/docker/nginx_conf/
-wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Nginx/nginx.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx.conf
 cd /data/docker/nginx_conf/conf.d/
-wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Nginx/nginx_main.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx_main.conf
 
 #启动容器
-docker run -itd --name dockernginx \
+docker run -itd --name DockerNginx \
 --link=centos6MariaDBv1:centos6MariaDBv1 \
 --link=centos6_httpd_php56:centos6_httpd_php56 \
 --restart always \

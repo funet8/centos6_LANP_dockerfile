@@ -2,11 +2,11 @@
 
 mkdir -p /data/docker/httpd/conf.d/
 cd /data/docker/httpd/
-wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/httpd.conf
-wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/php.ini
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Apache_php5.6/httpd.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Apache_php5.6/php.ini
 
 cd /data/docker/httpd/conf.d/
-wget https://github.com/funet8/centos6_LANP_dockerfile/blob/master/centos6_Yum_Apache_php5.6/apache_main.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Apache_php5.6/apache_main.conf
 
 #启动容器 --link链接mysql容器
 docker run -itd --name centos6_httpd_php56 \
