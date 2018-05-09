@@ -96,6 +96,8 @@ ifconfig docker0 down
 brctl delbr docker0 
 docker -d 
 service docker restart
+或者
+/bin/systemctl restart  docker.service
 
 -bash: brctl: command not found
 解决：
