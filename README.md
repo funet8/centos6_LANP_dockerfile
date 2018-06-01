@@ -5,7 +5,7 @@
 | L | Centos6.9 |
 | N | nginx |
 | A | apache2.2 |
-| P | php5.3 |
+| P | php5.6 |
 
 # 使用shell脚本构建lnmap
 ```
@@ -48,9 +48,6 @@ mysql>GRANT  all privileges ON * . * TO 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh
 mysql>GRANT ALL PRIVILEGES ON * . * TO 'dbuser_lxx'@'%' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 mysql>flush privileges;
 ```
-
-
-
 进入相应目录构建进行
 ```
 cd centos6_LANP_dockerfile/centos6_lnap/

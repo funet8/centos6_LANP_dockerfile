@@ -52,6 +52,10 @@ ADD httpd.conf /etc/httpd/conf/httpd.conf
 ADD php.ini /etc/php.ini
 ADD apache_main.conf /etc/httpd/conf.d/apache_main.conf
 
+#解决不能解析PHP的问题
+ADD php.conf /etc/httpd/conf.d/php.conf
+ADD libphp5.so /etc/httpd/modules/libphp5.so
+
 RUN groupadd www && \ 
 useradd -g www www
 
