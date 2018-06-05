@@ -7,6 +7,18 @@
 | A | apache2.2 |
 | P | php5.6 |
 
+
+# 一、克隆项目
+```
+yum install git
+git clone https://github.com/funet8/centos6_LANP_dockerfile.git
+```
+
+# 二、安装docker
+```
+
+```
+
 # 使用shell脚本构建lnmap
 ```
 run-aliyun-mysql-apache-nginx.sh
@@ -17,8 +29,7 @@ run-aliyun-mysql-apache-nginx.sh
 ## 一、创建主镜像
 克隆项目
 ```
-yum install git
-git clone https://github.com/funet8/centos6_LANP_dockerfile.git
+
 ```
 
 ```
