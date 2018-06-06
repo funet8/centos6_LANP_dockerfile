@@ -10,41 +10,37 @@
 
 # 一、克隆项目
 ```
-yum install git
-git clone https://github.com/funet8/centos6_LANP_dockerfile.git
+# yum install -y git
+# git clone https://github.com/funet8/centos6_LANP_dockerfile.git
 ```
 
 # 二、安装docker
 ```
+# cd centos6_LANP_dockerfile/
+# sh CentOS6_7_intall_docker.sh
+查看docker版本
+# docker -v
+Docker version 1.13.1, build 94f4240/1.13.1
+```
+# 三、创建主镜像（centos6）
 
 ```
-
-# 使用shell脚本构建lnmap
+# cd centos6_LANP_dockerfile/centos6_v2/
+# sh build_docker_centos6.sh
+或者：
+# docker build -t  funet8/centos:6.9 .
 ```
-run-aliyun-mysql-apache-nginx.sh
-
+# 四、构建centos6_MariaDB镜像
 ```
-
-
-## 一、创建主镜像
-克隆项目
+# cd centos6_LANP_dockerfile/centos6_Yum_MariaDB
+构建镜像
+# docker build -t  funet8/centos6mariadb .
 ```
-
+## 启动MariaDB容器
 ```
+# docker run -itd --name centos6MariaDB  funet8/centos6mariadb
 
-```
-cd centos6_LANP_dockerfile/centos6_v2/
-sh build_docker_centos6.sh
-docker build -t  funet8/centos:6.9 .
-```
-## 构建centos6_MariaDB
-```
-
-docker build -t  funet8/centos6mariadb .
-
-docker run -itd --name centos6MariaDB  funet8/centos6mariadb
-
-docker run -itd --name centos6MariaDBv1 \
+# docker run -itd --name centos6MariaDBv1 \
 --restart always \
 -p 61950:3306 \
 -v /data/docker/mysql_conf/my.cnf:/etc/my.conf  \
@@ -52,6 +48,8 @@ docker run -itd --name centos6MariaDBv1 \
 -v /data/docker/mysql_docker:/var/lib/mysql \
 funet8/centos6mariadb
 ```
+## 进入容器并且创建用户
+
 进入mysql中创建远程登录用户，并且删除默认root用户
 ```
 mysql>CREATE USER 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh94JhYY303bb';
@@ -59,37 +57,29 @@ mysql>GRANT  all privileges ON * . * TO 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh
 mysql>GRANT ALL PRIVILEGES ON * . * TO 'dbuser_lxx'@'%' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 mysql>flush privileges;
 ```
-进入相应目录构建进行
+# 五、创建基于Centos6下的LNAP
 ```
-cd centos6_LANP_dockerfile/centos6_lnap/
+# cd centos6_LANP_dockerfile/centos6_lnap/
 创建目录
-sh create_dir.sh
+# sh create_dir.sh
 构建镜像:
-docker build -t  funet8/centos_lnap:6.9.1 .
+# docker build -t  funet8/centos_lnap:6.9.1 .
 ```
-启动容器：
+## 启动容器：
 ```
 docker run -itd --name centos6lnap --restart always -p 80:80 -p 443:443 -v /data/:/data/ -v /data/conf/nginx.conf:/etc/nginx/nginx.conf -v /data/conf/httpd.conf:/etc/httpd/conf/httpd.conf -v /data/conf/php.ini:/etc/php.ini  funet8/centos_lnap:6.9.1
 ```
 
-
-
-
-
-
-
-
-
-
+-----------分割线----------------------------------------
 
 
 # 管理容器
-进入容器
+## 进入容器
 ```
 docker logs centos6lnap
 docker exec -it centos6lnap /bin/bash
 ```
-删除容器和镜像
+## 删除容器和镜像
 ```
 docker rm -f centos6lnap
 docker rmi funet8/centos_lnap:6.9.1

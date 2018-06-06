@@ -1,11 +1,24 @@
 #!/bin/bash
 
+###########################################################
+###创建目录
+mkdir /home/data
+ln -s /home/data /data
+mkdir /www
+mkdir /data/wwwroot
+ln -s /data/wwwroot /www/
+mkdir -p /data/wwwroot/{web,log}
+mkdir -p /data/wwwroot/log/{web,other}
+mkdir /data/conf
+mkdir /data/conf/{sites-available,shell}
+mkdir /backup
+ln -s /backup /data/
 
 ###########################################################
 ###构建mysql-docker
 #解压配置文件和数据库目录
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_MariaDB/mysql_docker.tar.gz && tar -zxf mysql_docker.tar.gz -C /data/docker/
-     
+
 #使用阿里云镜像
 #docker run -itd --name centos6base  registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
 
