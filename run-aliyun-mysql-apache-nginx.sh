@@ -1,4 +1,10 @@
 #!/bin/bash
+###########################################################
+##使用私有阿里云docker仓库
+#1.登录
+# docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
+# 输入密码
+
 
 ###########################################################
 ###创建目录
@@ -13,6 +19,8 @@ mkdir /data/conf
 mkdir /data/conf/{sites-available,shell}
 mkdir /backup
 ln -s /backup /data/
+
+
 
 ###########################################################
 ###构建mysql-docker
@@ -61,7 +69,7 @@ docker run -itd --name centos6_httpd_php56 \
 -v /data/docker/httpd/php.ini:/etc/php.ini  \
 -v /data/docker/httpd/conf.d/:/etc/httpd/conf.d/  \
 -v /data/wwwroot/:/data/wwwroot/ \
-registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:latest
+registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
 
 ###########################################################
 ###########################################################
