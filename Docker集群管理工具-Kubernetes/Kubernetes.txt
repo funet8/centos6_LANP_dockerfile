@@ -1,0 +1,10 @@
+Kubernetes 简称K8S
+K8s 介绍
+https://blog.csdn.net/zhangxxxww/article/details/73547251
+
+
+基于Kubernetes 1.0.6 构建Docker集群管理
+http://www.dockone.io/article/758
+
+二、基于kubernetes构建Docker集群环境实战
+https://www.cnblogs.com/xhyan/p/6655731.html
