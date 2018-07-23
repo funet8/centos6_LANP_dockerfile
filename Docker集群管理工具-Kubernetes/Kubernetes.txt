@@ -8,3 +8,5 @@ http://www.dockone.io/article/758
 
 二、基于kubernetes构建Docker集群环境实战
 https://www.cnblogs.com/xhyan/p/6655731.html
+
+https://blog.csdn.net/Real_Myth/article/details/78719244
