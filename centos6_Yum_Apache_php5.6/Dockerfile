@@ -60,7 +60,7 @@ RUN groupadd www && \
 useradd -g www www
 
 #httpd目录没有权限，无法使用www用户生成文件，（导致权限的问题）
-chown www.www -R /var/run/httpd/
+RUN chown www.www -R /var/run/httpd/
 
 #允许www使用sudo
 RUN echo "www    ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers 

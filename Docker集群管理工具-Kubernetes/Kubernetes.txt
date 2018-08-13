@@ -2,6 +2,9 @@ Kubernetes 简称K8S
 K8s 介绍
 https://blog.csdn.net/zhangxxxww/article/details/73547251
 
+Kubernetes（k8s）是自动化容器操作的开源平台，这些操作包括部署，调度和节点集群间扩展。
+
+
 
 基于Kubernetes 1.0.6 构建Docker集群管理
 http://www.dockone.io/article/758
@@ -9,4 +12,5 @@ http://www.dockone.io/article/758
 二、基于kubernetes构建Docker集群环境实战
 https://www.cnblogs.com/xhyan/p/6655731.html
 
+一、Kubernetes系列之介绍篇
 https://blog.csdn.net/Real_Myth/article/details/78719244
