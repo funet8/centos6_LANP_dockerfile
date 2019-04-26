@@ -85,6 +85,27 @@ docker rm -f centos6lnap
 docker rmi funet8/centos_lnap:6.9.1
 ```
 
+## 容器权限问题
+```
+###权限问题的总结
+
+#在宿主上查看www用户的ID
+
+## cat /etc/passwd |grep www
+
+#www:x:1001:1001::/home/www:/sbin/nologin
+
+#进入docker虚拟机
+
+## usermod -u 1001 www
+
+## groupmod -g 1001 www
+
+#将所需要的目录更改权限
+
+#chown www.www -R /data/web/dir/
+```
+
 
 ## docker网络问题解决
 ```
@@ -96,6 +117,7 @@ docker -d
 service docker restart
 或者
 /bin/systemctl restart  docker.service
+/bin/systemctl restart iptables
 
 -bash: brctl: command not found
 解决：
