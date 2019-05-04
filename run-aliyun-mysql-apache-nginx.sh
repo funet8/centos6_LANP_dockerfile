@@ -18,6 +18,10 @@
 #解压配置文件和数据库目录
 ###########################################################
 
+#新建用户
+useradd -s /sbin/nologin -M www
+useradd -s /sbin/nologin -M mysql
+
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_MariaDB/mysql_docker.tar.gz && tar -zxf mysql_docker.tar.gz -C /data/docker/
 ###########################################################
 #使用阿里云镜像
@@ -85,6 +89,7 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
 ###########################################################
 ###########################################################
 ###每日的日志切割
+mkdir /data/conf/shell/
 cd /data/conf/shell/
 wget  https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/cut_nginx_log.sh
 chmod +x /data/conf/shell/cut_nginx_log.sh
@@ -99,3 +104,6 @@ systemctl restart crond
 ## groupmod -g 1001 www
 #将所需要的目录更改权限
 #chown www.www -R /data/web/dir/
+#cat /etc/passwd |grep mysql
+
+

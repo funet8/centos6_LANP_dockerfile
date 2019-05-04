@@ -14,6 +14,9 @@
 # 输入密码
 ###########################################################
 ###########################################################
+#新建用户
+useradd -s /sbin/nologin -M www
+useradd -s /sbin/nologin -M mysql
 
 ###构建apache-docker
 mkdir -p /data/docker/httpd/conf.d/
@@ -57,6 +60,7 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
 ###########################################################
 ###########################################################
 ###每日的日志切割
+mkdir /data/conf/shell/
 cd /data/conf/shell/
 wget  https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/cut_nginx_log.sh
 chmod +x /data/conf/shell/cut_nginx_log.sh
