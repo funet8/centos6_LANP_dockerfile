@@ -1,0 +1,176 @@
+*****************************************************
+Docker 架构：
+http://www.runoob.com/docker/docker-architecture.html
+
+Docker 镜像(Images)：Docker 镜像是用于创建 Docker 容器的模板。
+Docker 容器(Container)：容器是独立运行的一个或一组应用。
+Docker Machine：Docker Machine是一个简化Docker安装的命令行工具，通过一个简单的命令行即可在相应的平台上安装Docker，比如VirtualBox、 Digital Ocean、Microsoft Azure。
+
+*****************************************************
+CentOS Docker 安装：
+http://www.runoob.com/docker/centos-docker-install.html
+
+前提条件
+目前，CentOS 仅发行版本中的内核支持 Docker。
+Docker 运行在 CentOS 7 上，要求系统为64位、系统内核版本为 3.10 以上。
+Docker 运行在 CentOS-6.5 或更高的版本的 CentOS 上，要求系统为64位、系统内核版本为 2.6.32-431 或者更高版本。
+
+使用 yum 安装（CentOS 7下）
+Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
+通过 uname -r 命令查看你当前的内核版本
+[root@runoob ~]# uname -r 3.10.0-327.el7.x86_64
+
+yum -y install docker
+[root@docker100 ~]# yum install docker-io
+No package docker available.
+Error: Nothing to do
+		解决办法：
+		yum install epel-release
+		来源：http://blog.csdn.net/lcyloser/article/details/53218589
+
+[root@docker100 ~]# yum install docker-io
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+Error: Cannot retrieve metalink for repository: epel. Please verify its path and try again		
+升级kernel内核：
+	rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+	rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+	yum install kernel-3.10.0-123.1.2.el7.x86_64.rpm
+
+
+service docker start
+
+测试运行 hello-world：
+docker run hello-world
+由于本地没有hello-world这个镜像，所以会下载一个hello-world的镜像，并在容器内运行。
+
+
+[root@docker100 ~]# docker run hello-world
+Segmentation Fault or Critical Error encountered. Dumping core and aborting.
+Aborted
+		解决办法：
+		yum install docker-io
+		http://blog.csdn.net/zgljl2012/article/details/53283164
+
+Transaction Check Error:
+  file /usr/bin/docker from install of docker-io-1.7.1-2.el6.x86_64 conflicts with file from package docker-1.5-5.el6.x86_64		
+  
+  
+  
+ 
+********************************yum升级CentOS 6.5 kernel至3.10.52********************************
+
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+yum --enablerepo=elrepo-kernel -y install kernel-lt
+
+vi /etc/grub.conf
+default=1 【修改Grub引导顺序，设置default值（从0开始），一般新安装的内核在第一个位置，所以设置default=0】
+
+然后重启
+
+来自：
+http://www.centoscn.com/CentOS/config/2014/0912/3729.html
+http://www.cnblogs.com/zengkefu/p/5667145.html
+
+********************************yum升级CentOS 6.5 kernel至3.10.52END********************************
+
+
+yum install http://mirrors.yun-idc.com/epel/6/i386/epel-release-6-8.noarch.rpm
+yum install docker-io
+yum upgrade device-mapper-libs
+
+
+
+
+系统为centos6.4
+
+方法一：
+# yum -y update	【升级centos】  http://elrepo.org/tiki/tiki-index.php
+
+# 【升级kernel】
+# rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+# rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+# yum --enablerepo=elrepo-kernel -y install kernel-lt
+
+vi /etc/grub.conf
+default=1
+重启系统
+
+yum install http://mirrors.yun-idc.com/epel/6/i386/epel-release-6-8.noarch.rpm
+yum install docker-io
+yum remove docker
+
+
+[root@docker100 ~]# /usr/bin/docker 
+Segmentation Fault or Critical Error encountered. Dumping core and aborting.
+Aborted
+http://blog.csdn.net/zgljl2012/article/details/53283164
+
+
+[root@docker100 ~]# docker run hello-world
+Post http:///var/run/docker.sock/v1.19/containers/create: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
+
+
+
+
+
+方法二：使用脚本安装 Docker
+2、确保 yum 包更新到最新。
+# yum update
+3、执行 Docker 安装脚本。
+# curl -fsSL https://get.docker.com/ | sh
+执行这个脚本会添加 docker.repo 源并安装 Docker。
+4、启动 Docker 进程。
+# service docker start
+5、验证 docker 是否安装成功并在容器中执行一个测试的镜像。
+# docker run hello-world
+到此，docker 在 CentOS 系统的安装完成。
+
+
+启动服务：
+service docker start
+开机启动：
+chkconfig docker on
+
+
+CentOS 修改源为163和指定epel源和Docker安装: http://www.linuxidc.com/Linux/2014-09/106671.htm
+CentOS 6.5 Docker自制CentOS镜像:  			http://www.linuxidc.com/Linux/2014-09/106672.htm
+
+
+
+
+
+[root@docker100 ~]# docker -d
+INFO[0000] Listening for HTTP on unix (/var/run/docker.sock) 
+INFO[0000] [graphdriver] using prior storage driver "devicemapper" 
+WARN[0000] Running modprobe bridge nf_nat failed with message: , error: exit status 1 
+WARN[0000] Your kernel does not support swap memory limit. 
+INFO[0000] Loading containers: start.                   
+
+INFO[0000] Loading containers: done.                    
+INFO[0000] Daemon has completed initialization          
+INFO[0000] Docker daemon                                 commit=786b29d/1.7.1 execdriver=native-0.2 graphdriver=devicemapper version=1.7.1
+
+
+
+[root@docker100 yum.repos.d]# docker pull centos:latest
+latest: Pulling from centos
+3690474eb5b4: Pull complete 
+af0819ed1fac: Pull complete 
+05fe84bf6d3f: Pull complete 
+97cad5e16cb6: Pull complete 
+Digest: sha256:934ff980b04db1b7484595bac0c8e6f838e1917ad3a38f904ece64f70bbca040
+Status: Downloaded newer image for centos:latest
+
+
+
+
+
+
+ 
+		
+
+
+
+

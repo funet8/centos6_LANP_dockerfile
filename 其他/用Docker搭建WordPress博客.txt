@@ -1,0 +1,153 @@
+1.docker安装WordPress
+docker pull wordpress:latest
+
+2.安装MySQL
+docker pull mysql:latest
+docker run --name lxx_mysql5.7 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+
+tag参数是MySQL的版本号，可以是5.7、5.6、8.0。
+
+
+3.配置WordPress
+docker run --name lxx-wordpress --link lxx_mysql5.7:mysql -p 8080:80 -d wordpress
+
+如果使用外部的MySQL数据库，则输入下面的命令:
+docker run --name lxx-wordpress -e WORDPRESS_DB_HOST=192.168.1.2:61920 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 -p 8080:80 -d wordpress
+docker exec -it lxx-wordpress /bin/bash
+
+docker run --name lxx-wordpress -e WORDPRESS_DB_HOST=192.168.1.2:61920 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 -p 80:80 -d wordpress
+
+docker run --name lxx-wordpress -e WORDPRESS_DB_HOST=192.168.1.2:61920 -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=123456 \
+-p 80:80 -v /data/wwwroot/web/wordpress:/var/www/html -d wordpress
+
+提交新生成的镜像:
+docker commit d7c463f98a72 test_lxx/lxx-wordpress:v1
+
+
+docker run -p 80:80 -v /data/wwwroot/web/wordpress:/var/www/html -d test_lxx/lxx-wordpress:v1
+
+WORDPRESS_DB_HOST: 参数是MySQL的数据库端口号，不能填写localhost,因为这样会重定向到WordPress镜像内部的localhost。所以这里需要填写本机IP地址，才能正确访问到Docker外部的本机的数据库。
+WORDPRESS_DB_USER:要数据库用户名，
+WORDPRESS_DB_PASSWORD：是数据库密码。
+
+http://192.168.1.243/
+
+
+
+
+
+参考：
+用Docker搭建WordPress博客
+http://blog.csdn.net/u011054333/article/details/70136099
+
+
+
+
+
+
+4. 制作生成新镜像
+先查看下刚刚运行的容器（安装lnmp的）的ID，在使用该ID生成新的镜像。
+ 1） 查看刚刚运行的容器ID
+# docker ps -lq
+d7c463f98a72
+提交生成新镜像
+# docker commit d7c463f98a72 vckai/dev:v1
+
+fe77b1628688这里一般只需要使用前几位数就行了，只要不重复能识别到，可以不输入全部的，
+vckai/dev:v1 是我生成的新镜像名，如果输入已有的镜像名，则会覆盖原有的镜像。
+
+
+docker 搭建LNMP环境:
+http://blog.csdn.net/watson2016/article/details/53143380
+使用Docker快速搭建Nginx+PHP-FPM环境
+http://www.jianshu.com/p/3384e342502b
+
+1.下载nginx官方镜像和php-fpm镜像
+docker pull nginx
+docker pull bitnami/php-fpm
+
+2.使用php-fpm镜像开启php-fpm应用容器
+docker run -d --name myFpm -p 9000:9000 -v  /var/www/html:/usr/share/nginx/html bitnami/php-fpm
+
+3.使用nginx镜像开启nginx应用容器
+docker run -d --name myNginx -p 8080:80 -v /var/www/html:/usr/share/nginx/html nginx
+-p : 该参数设置端口对应的关系。所有访问宿主机8080端口的URL会转发到nginx容器的80端口。
+首先查看是否启动成功
+docker ps -a
+
+查看IP信息
+docker inspect myFpm | grep "IPAddress"
+
+修改nginx的相关配置
+在容器中是没有vim命令的，所以不能在容器中直接修改配置文件。所以我们必须通过变通的方式去解决这个问题，否则只能在每个容器中安装vim。
+docker exec -it myNginx /bin/bash
+查看对应的配置文件位置
+/etc/nginx/conf.d/default.conf
+
+docker cp myNginx:/etc/nginx/conf.d/default.conf /root/default.conf
+docker cp myNginx:/etc/nginx/nginx.conf /root/nginx.conf
+
+
+在宿主机修改配置文件的php部分，内容如下：
+location ~ \.php$ {
+   fastcgi_pass   172.17.0.3:9000;
+   fastcgi_index  index.php;
+   fastcgi_param  SCRIPT_FILENAME  /usr/share/nginx/html$fastcgi_script_name;
+   fastcgi_param  SCRIPT_NAME      $fastcgi_script_name;
+   include        fastcgi_params;
+}
+再次使用复制命令将其复制到容器中，然后再次进入容器中，将nginx配置文件重新载入
+docker cp /root/default.conf myNginx:/etc/nginx/conf.d/default.conf
+docker cp /root/nginx.conf myNginx:/etc/nginx/nginx.conf
+
+进入到nginx容器中重新载入配置文件
+docker exec -it myNginx /bin/bash
+service nginx reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
