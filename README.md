@@ -15,27 +15,30 @@
 ```
 
 # 二、安装docker
+
 ```
-# cd centos6_LANP_dockerfile/
+# wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS6_7_intall_docker.sh
 # sh CentOS6_7_intall_docker.sh
 查看docker版本
 # docker -v
 Docker version 1.13.1, build 94f4240/1.13.1
 ```
-# 三、创建主镜像（centos6）
 
+# 三、创建主镜像（centos6）
 ```
 # cd centos6_LANP_dockerfile/centos6_v2/
 # sh build_docker_centos6.sh
 或者：
 # docker build -t  funet8/centos:6.9 .
 ```
+
 # 四、构建centos6_MariaDB镜像
 ```
 # cd centos6_LANP_dockerfile/centos6_Yum_MariaDB
 构建镜像
 # docker build -t  funet8/centos6mariadb .
 ```
+
 ## 启动MariaDB容器
 ```
 # docker run -itd --name centos6MariaDB  funet8/centos6mariadb
@@ -48,8 +51,8 @@ Docker version 1.13.1, build 94f4240/1.13.1
 -v /data/docker/mysql_docker:/var/lib/mysql \
 funet8/centos6mariadb
 ```
-## 进入容器并且创建用户
 
+## 进入容器并且创建用户
 进入mysql中创建远程登录用户，并且删除默认root用户
 ```
 mysql>CREATE USER 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh94JhYY303bb';
@@ -57,6 +60,7 @@ mysql>GRANT  all privileges ON * . * TO 'dbuser_lxx'@'%' IDENTIFIED BY 'Yxa7dvKh
 mysql>GRANT ALL PRIVILEGES ON * . * TO 'dbuser_lxx'@'%' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 mysql>flush privileges;
 ```
+
 # 五、创建基于Centos6下的LNAP
 ```
 # cd centos6_LANP_dockerfile/centos6_lnap/

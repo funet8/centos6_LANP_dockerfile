@@ -86,7 +86,7 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
 ###########################################################
 ###每日的日志切割
 cd /data/conf/shell/
-wget  https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/cut_nginx_log.sh
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/cut_log_nginx_docker.sh
 chmod +x /data/conf/shell/cut_nginx_log.sh
 echo '00 00 * * * root /data/conf/shell/cut_nginx_log.sh' >> /etc/crontab
 systemctl restart crond

@@ -1,0 +1,69 @@
+location ~ \.php$ {
+	root html;
+	fastcgi_pass 127.0.0.1:9000;
+	fastcgi_index index.php;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	include fastcgi_params;
+}
+
+docker run -itd --name dockernginx \
+--restart always \
+-p 80:80 -p 443:443 \
+-v /data/docker/nginx_conf/nginx.conf:/etc/nginx/nginx.conf \
+-v /data/docker/nginx_conf/conf.d/:/etc/nginx/conf.d/ \
+-v /data/wwwroot/log/:/var/log/nginx/  \
+-v /data/wwwroot/:/data/wwwroot/ \
+registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
+
+
+server {
+        listen       80;
+        server_name  www.test04.me;
+		access_log /data/wwwroot/log/www.test04.me-access.log main_zdy;
+        error_log /data/wwwroot/log/www.test04.me-error.log;        
+        root /data/wwwroot/web/www.test04.me/;
+		set $root_dir "/data/wwwroot/web/www.test04.me/";
+        location / {
+                index  index.html index.htm index.php;
+        }
+        location ~ \.php$ {
+			root html;
+			fastcgi_pass 127.0.0.1:9000;
+			fastcgi_index index.php;
+			#fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			fastcgi_param SCRIPT_FILENAME $root_dir$fastcgi_script_name;
+			include fastcgi_params;
+		}
+
+        location ~ .*\.(htm|html|apk|css|js|jpg|jpeg|gif|png|ico|bmp|gz|xml|zip|rar|swf|txt|xls|xlsx|flv|mid|doc|ppt|pdf|mp3|wma|exe)?$ {
+                expires max;
+				access_log off;
+        }
+}
+
+/usr/local/php/etc/php-fpm.d/www.conf
+/etc/init.d/php-fpm restart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
