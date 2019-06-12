@@ -12,7 +12,8 @@
 ###########################################################
 
 
-PHP_URL=http://ftp.ntu.edu.tw/php/distributions
+#PHP_URL=http://ftp.ntu.edu.tw/php/distributions
+PHP_URL=https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php
 PHP_FILE=php-7.1.5.tar.gz
 PHP_FILE_DIR=php-7.1.5
 PHP_PREFIX=/usr/local/php7
