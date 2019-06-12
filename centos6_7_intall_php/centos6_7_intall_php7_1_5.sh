@@ -19,7 +19,7 @@ PHP_FILE_DIR=php-7.1.5
 PHP_PREFIX=/usr/local/php7
 USER=www
 #php-fpm端口
-PHP_PORT=7000
+PHP_PORT='7000'
 
 function install_php {
 	if [ ! -d ${PHP_PREFIX} ];then

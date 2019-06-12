@@ -20,7 +20,7 @@ PHP_FILE_DIR=php-5.6.9
 PHP_PREFIX=/usr/local/php5.6
 USER=www
 #php-fpm端口
-PHP_PORT=5600
+PHP_PORT='5600'
 
 function install_php {
 	if [ ! -d ${PHP_PREFIX} ];then
