@@ -71,7 +71,7 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/cen
 cd /data/docker/nginx_conf/conf.d/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx_main.conf
 #启动容器
-docker run -itd --name dockernginx \
+docker run -itd --name nginx \
 --link=centos6mysql:centos6mysql \
 --link=centos6_httpd_php56:centos6_httpd_php56 \
 --restart always \

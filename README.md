@@ -55,7 +55,9 @@ docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
 
 ## 构建nginx
 ```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-nginx.sh
 
+sh CentOS6_7_intall_docker.sh
 ```
 
 

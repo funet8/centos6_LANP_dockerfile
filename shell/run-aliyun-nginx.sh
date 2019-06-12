@@ -2,7 +2,7 @@
 
 ###########################################################
 #名字：	run-aliyun-nginx.sh
-#功能：	自动创建基于CENTOS6的apache+nginx
+#功能：	自动创建基于CENTOS6的nginx
 #作者：	star
 #邮件:	funet8@163.com
 #必须登录阿里云docker仓库！！！！
@@ -14,6 +14,8 @@
 # 输入密码
 ###########################################################
 ###########################################################
+DOCKER_name="nginx"
+
 
 ###构建nginx-docker
 mkdir -p /data/docker/nginx_conf/conf.d/
@@ -22,7 +24,7 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/cen
 cd /data/docker/nginx_conf/conf.d/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx_main.conf
 #启动容器
-docker run -itd --name nginx \
+docker run -itd --name ${DOCKER_name} \
 --restart always \
 -p 80:80 -p 443:443 \
 -v /data/docker/nginx_conf/nginx.conf:/etc/nginx/nginx.conf \
@@ -30,3 +32,5 @@ docker run -itd --name nginx \
 -v /data/wwwroot/log/:/var/log/nginx/  \
 -v /data/wwwroot/:/data/wwwroot/ \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
+
+cd /root/
