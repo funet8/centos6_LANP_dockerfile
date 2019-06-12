@@ -17,6 +17,8 @@ PHP_FILE=php-7.1.5.tar.gz
 PHP_FILE_DIR=php-7.1.5
 PHP_PREFIX=/usr/local/php7
 USER=www
+#php-fpm端口
+PHP_PORT=7000
 
 function install_php {
 	if [ ! -d ${PHP_PREFIX} ];then
@@ -26,7 +28,7 @@ function install_php {
 	cd ${PHP_PREFIX}
 	
 	#安装依赖包
-	yum –y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
+yum -y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
 	
 	./configure --prefix=${PHP_PREFIX} \
 	--with-config-file-path=/etc \
@@ -114,11 +116,11 @@ function config_php {
 	
 	
 	#端口改为：5600
-	#listen = 127.0.0.1:9000  listen = 0.0.0.0:5600
+	#listen = 127.0.0.1:9000  listen = 0.0.0.0:7000
 	#修改配置文件
-	sed -i 's/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:7000/g' ${PHP_PREFIX}/etc/php-fpm.d/www.conf
+	sed -i 's/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:${PHP_PORT}/g' ${PHP_PREFIX}/etc/php-fpm.d/www.conf
 	
-	iptables -A INPUT -p tcp --dport 7000 -j ACCEPT
+	iptables -A INPUT -p tcp --dport ${PHP_PORT} -j ACCEPT
 	
 	#开机启动	
 	/etc/init.d/php-fpm start

@@ -13,9 +13,10 @@
 ###########################################################
 
 
-PHP_URL=http://ftp.ntu.edu.tw/php/distributions
+#PHP_URL=http://ftp.ntu.edu.tw/php/distributions
+PHP_URL=https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php
 PHP_FILE=php-5.6.9.tar.gz
-PHP_FILE_DIR=php-5.6.7
+PHP_FILE_DIR=php-5.6.9
 PHP_PREFIX=/usr/local/php5.6
 USER=www
 #php-fpm端口
@@ -28,8 +29,8 @@ function install_php {
 	mv ${PHP_FILE_DIR} ${PHP_PREFIX}
 	cd ${PHP_PREFIX}
 	
-	#安装依赖包
-	yum –y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
+#安装依赖包
+yum -y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
 
 	./configure --prefix=${PHP_PREFIX} \
 	--with-config-file-path=/etc \
@@ -121,15 +122,14 @@ function config_php {
 	#端口改为：5600
 	#listen = 127.0.0.1:9000  listen = 0.0.0.0:5600
 	#修改配置文件
-	sed -i 's/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:5600/g' ${PHP_PREFIX}/etc/php-fpm.conf
+	sed -i 's/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:${PHP_PORT}/g' ${PHP_PREFIX}/etc/php-fpm.conf
 	
-	iptables -A INPUT -p tcp --dport 5600 -j ACCEPT
+	iptables -A INPUT -p tcp --dport ${PHP_PORT} -j ACCEPT
 	
 	/etc/init.d/php-fpm5.6 start
 	#开机启动
 	echo '/etc/init.d/php-fpm5.6 start'>> /etc/rc.local
 }
 
-	
 install_php
 config_php

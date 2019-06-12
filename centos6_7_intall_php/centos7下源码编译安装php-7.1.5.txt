@@ -50,10 +50,10 @@ server {
 
 
 
+mirror pushed to the ali cloud warehouse
 
 
-
-
+mirror_to_aliyun
 
 
 
