@@ -55,7 +55,8 @@ mirror pushed to the ali cloud warehouse
 
 mirror_to_aliyun
 
-
+/etc/init.d/php-fpm5.6 restart
+/etc/init.d/php-fpm7 restart
 
 
 

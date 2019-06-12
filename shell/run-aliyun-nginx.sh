@@ -33,4 +33,17 @@ docker run -itd --name ${DOCKER_name} \
 -v /data/wwwroot/:/data/wwwroot/ \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
 
-cd /root/
+##检查docker-nginx的脚本
+echo "
+#!/bin/bash
+DOCKER_name=nginx
+docker exec -it $DOCKER_name /bin/bash -c 'nginx -t'
+">/root/test_docker_nginx.sh
+
+##重启docker-nginx的脚本
+echo "
+#!/bin/bash
+DOCKER_name=nginx
+docker restart $DOCKER_name
+" > /root/update_docker_nginx.sh
+
