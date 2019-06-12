@@ -6,14 +6,16 @@
 #邮件：	star@funet8.com
 #时间：      2019/05/08
 #Version 1.0
-#20190508修改记录：
+#20190612修改记录：
 # shell脚本初始化
-#说明：必须登录阿里云docker仓库！！！！
+#说明：
+#PHP官网：https://www.php.net/downloads.php
 ###########################################################
 
 
 #PHP_URL=http://ftp.ntu.edu.tw/php/distributions
-PHP_URL=https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php
+#PHP_URL=https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php
+PHP_URL=http://www.funet8.com/centos_software
 PHP_FILE=php-7.1.5.tar.gz
 PHP_FILE_DIR=php-7.1.5
 PHP_PREFIX=/usr/local/php7
@@ -23,7 +25,8 @@ PHP_PORT='7000'
 
 function install_php {
 	if [ ! -d ${PHP_PREFIX} ];then
-		wget -c ${PHP_URL}/${PHP_FILE}
+		wget -c ${PHP_URL}/${
+		}
 	tar zxf ${PHP_FILE}
 	mv ${PHP_FILE_DIR} ${PHP_PREFIX}
 	cd ${PHP_PREFIX}
@@ -119,12 +122,12 @@ function config_php {
 	#端口改为：5600
 	#listen = 127.0.0.1:9000  listen = 0.0.0.0:7000
 	#修改配置文件
-	sed -i 's/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:${PHP_PORT}/g' ${PHP_PREFIX}/etc/php-fpm.d/www.conf
+	sed -i "s/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:${PHP_PORT}/g" ${PHP_PREFIX}/etc/php-fpm.d/www.conf
 	
 	iptables -A INPUT -p tcp --dport ${PHP_PORT} -j ACCEPT
 	
 	#开机启动	
-	/etc/init.d/php-fpm start
+	/etc/init.d/php-fpm7 start
 	echo '/etc/init.d/php-fpm7 start'>> /etc/rc.local
 	
 	}
