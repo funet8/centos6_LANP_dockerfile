@@ -14,7 +14,7 @@
 # 输入密码
 ###########################################################
 ###########################################################
-DOCKER_name="centos6_httpd_php56"
+DOCKER_httpd="centos6_httpd_php56"
 
 ###构建apache-docker
 mkdir -p /data/docker/httpd/conf.d/
@@ -27,7 +27,7 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/cen
 ###########################################################
 #启动容器 --link链接mysql容器
 ###########################################################
-docker run -itd --name ${DOCKER_name} \
+docker run -itd --name ${DOCKER_httpd} \
 --restart always \
 -p 8080:8080 \
 -v /data/docker/httpd/httpd.conf:/etc/httpd/conf/httpd.conf \
@@ -35,6 +35,29 @@ docker run -itd --name ${DOCKER_name} \
 -v /data/docker/httpd/conf.d/:/etc/httpd/conf.d/  \
 -v /data/wwwroot/:/data/wwwroot/ \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
+
+##检查docker-nginx的脚本
+echo "
+DOCKER_httpd=centos6_httpd_php56
+docker exec -it $DOCKER_httpd /bin/bash -c 'nginx -t'
+">>/root/test_docker_conf.sh
+
+##重启docker-nginx的脚本
+echo "
+DOCKER_httpd=centos6_httpd_php56
+docker restart $DOCKER_httpd
+" >> /root/update_docker_web.sh
+
+##保存并重启iptables
+service iptables save
+systemctl restart iptables.service
+
+##删除docker
+#rm -rf /data/docker/httpd
+#docker rm -f ${DOCKER_httpd}
+
+
+
 
 ###权限问题的总结
 #在宿主上查看www用户的ID
