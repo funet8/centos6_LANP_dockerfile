@@ -50,12 +50,6 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh CentOS6_7_intall_docker.sh
 ```
 
-## 登录阿里云docker仓库
-需要登录阿里云的docker
-```
-docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
-输入密码
-```
 
 ## 构建基于docker的nginx
 ```

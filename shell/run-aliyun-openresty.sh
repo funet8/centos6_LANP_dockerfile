@@ -38,11 +38,11 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/doc
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/docker_openresty/waf/rule-config/whiteurl.rule
 
 #启动容器
-docker run -itd --name="openresty" \
+docker run -itd --name=${DOCKER_openresty} \
 --restart always \
 -p 80:80 \
 -p 443:443 \
--v /data/docker/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro \
+-v /data/docker/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
 -v /data/docker/openresty/conf.d:/etc/nginx/conf.d \
 -v /data/wwwroot/:/data/wwwroot/ \
 -v /etc/localtime:/etc/localtime \
@@ -67,7 +67,7 @@ systemctl restart iptables.service
 
 ##删除docker
 #rm -rf /data/docker/openresty /root/test_docker_conf.sh /root/update_docker_web.sh
-#docker rm -f ${DOCKER_openresty}
-
+#docker rm -f openresty
+#docker log -f openresty
 
 
