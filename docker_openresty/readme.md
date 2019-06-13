@@ -15,10 +15,22 @@ docker pull openresty/openresty:1.9.15.1-trusty
 docker run -itd --name openresty \
 --restart always \
 -p 80:80 -p 443:443 \
--v /data/docker/openresty/config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro \
+-v /data/docker/openresty/config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
 -v /data/docker/openresty/logs:/usr/local/openresty/nginx/logs \
 openresty/openresty:1.9.15.1-trusty
+
+报错：
+/usr/bin/docker-current: Error response from daemon: oci runtime error: container_linux.go:235: starting container process caused "container init exited prematurely".
+
 ```
+
+换方式
+```
+docker search openresty
+docker pull openresty/openresty
+
+```
+
 
 3.nginx配置
 ```

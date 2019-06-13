@@ -1,5 +1,7 @@
 # Centos下构建LNMAP-web开发环境
 
+环境说明：
+宿主系统： Centos7
 
 | 字母| 代表 | 端口 |
 |---|---|---|
@@ -49,16 +51,15 @@ sh CentOS6_7_intall_docker.sh
 ```
 
 ## 登录阿里云docker仓库
+需要登录阿里云的docker
 ```
 docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
+输入密码
 ```
 
 ## 构建基于docker的nginx
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-nginx.sh
-需要登录阿里云的docker
-# docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
-# 输入密码
 sh run-aliyun-nginx.sh
 ```
 
@@ -80,6 +81,14 @@ echo '00 00 * * * root /data/conf/shell/cut_nginx_log.sh' >> /etc/crontab
 systemctl restart crond
 ```
 
+
+## 重启docker网络
+
+这是由于来自守护进程的错误响应，而致使外部连接失败。解决的办法就是将其docker进程 kill掉，然后再 清空掉iptables下nat表下的所有链（规则） 。最后，将 docker的网桥删除，并重启docker服务
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/docker_net.sh
+sh docker_net.sh
+```
 
 
 

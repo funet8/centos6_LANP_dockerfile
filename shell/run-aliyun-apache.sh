@@ -38,7 +38,7 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
 
 ##检查docker-nginx的脚本
 echo "
-docker exec -it $DOCKER_httpd /bin/bash -c 'nginx -t'
+docker exec -it $DOCKER_httpd /bin/bash -c 'httpd -t'
 ">>/root/test_docker_conf.sh
 
 ##重启docker-nginx的脚本
@@ -51,7 +51,7 @@ service iptables save
 systemctl restart iptables.service
 
 ##删除docker
-#rm -rf /data/docker/httpd /root/update_docker_web.sh /root/update_docker_web.sh
+#rm -rf /data/docker/httpd /root/test_docker_conf.sh /root/update_docker_web.sh
 #docker rm -f ${DOCKER_httpd}
 
 
