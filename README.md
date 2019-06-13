@@ -63,6 +63,12 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-nginx.sh
 ```
 
+## 构建基于docker的openresty
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
+sh run-aliyun-openresty.sh
+```
+
 ## 构建基于docker的httpd
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-apache.sh

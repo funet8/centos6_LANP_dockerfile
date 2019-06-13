@@ -28,6 +28,9 @@ docker run -itd --name="openresty" \
 -v /etc/localtime:/etc/localtime \
 openresty/openresty
 
+或者更换阿里云仓库
+registry.cn-shenzhen.aliyuncs.com/funet8/openresty
+
 ```
 
 
@@ -140,6 +143,30 @@ aaaaaaaaaaaaaaaaa
 浏览器输入 http://192.168.0.4/?id=select * from name where name="jack"
 ```
 
+## 将openresty推送到自己的阿里云私有仓库中
+给本地镜像打标签
+```
+
+# docker images
+REPOSITORY                                                     TAG                 IMAGE ID            CREATED             SIZE
+docker.io/openresty/openresty                                  latest              feebb0109819        7 months ago        144 MB
+
+# docker tag docker.io/openresty/openresty registry.cn-shenzhen.aliyuncs.com/funet8/openresty
+```
+查看
+```
+# docker images
+REPOSITORY                                                     TAG                 IMAGE ID            CREATED             SIZE
+docker.io/openresty/openresty                                  latest              feebb0109819        7 months ago        144 MB
+registry.cn-shenzhen.aliyuncs.com/funet8/openresty             latest              feebb0109819        7 months ago        144 MB
+```
+将镜像推送到阿里云私有仓库中
+```
+docker push registry.cn-shenzhen.aliyuncs.com/funet8/openresty
+```
+
+登录阿里云后台是否成功
+https://cr.console.aliyun.com/#/imageList
 
 
 [openresty的docker实例](https://segmentfault.com/a/1190000007387013)

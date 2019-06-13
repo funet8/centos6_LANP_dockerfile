@@ -16,7 +16,8 @@ Email: funet8@163.com
 WARNING: login credentials saved in /root/.docker/config.json
 Login Succeeded
 ```
-** 使用自己的账号登录后可以下载自己私有的镜像服务。**
+
+**使用自己的账号登录后可以下载自己私有的镜像服务。**
 大概分为以下几步骤。
 1.在阿里云ECS中构建成功镜像。
 2.将次镜像打一个“TAG”标签，将镜像推送到阿里云registry。（涉及到更新镜像）
@@ -24,7 +25,6 @@ Login Succeeded
 5.在阿里云或者其他服务器中拉取使用镜像。
 
 ## 参考脚本
-[阿里云脚本](run-aliyun-mysql-apache-nginx.sh)
 
 ### 查看本地镜像：
 ```
@@ -32,7 +32,9 @@ Login Succeeded
 REPOSITORY                                                 TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 funet8/centos6.9-base                                      latest              f22a5aff7f55        3 days ago          671.3 MB
 ```
+
 ### 将镜像推送到registry
+
 给本地镜像打标签
 ```
 docker tag [ImageId] registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-base:[镜像版本号]
@@ -44,6 +46,7 @@ docker tag [ImageId] registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-base:[�
 # docker tag funet8/centos6_httpd_php56:v1 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.8
 # docker tag funet8/centos6redis2:v2 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-redis:v1
 ```
+
 将centos7镜像推送到阿里云registry
 ```
 docker push registry.cn-shenzhen.aliyuncs.com/funet8/centos7.2-base:v1
