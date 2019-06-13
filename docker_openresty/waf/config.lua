@@ -3,9 +3,9 @@
 --waf status
 config_waf_enable = "on"
 --log dir
-config_log_dir = "/tmp"
+config_log_dir = "/data/wwwroot/log/"
 --rule setting
-config_rule_dir = "/usr/local/openresty/nginx/conf/waf/rule-config"
+config_rule_dir = "/etc/nginx/conf.d/waf/rule-config"
 --enable/disable white url
 config_white_url_check = "on"
 --enable/disable white ip
@@ -23,13 +23,13 @@ config_cookie_check = "on"
 --enable/disable cc filtering
 config_cc_check = "on"
 --cc rate the xxx of xxx seconds
-config_cc_rate = "10/60"
+config_cc_rate = "30/60"
 --enable/disable post filtering
 config_post_check = "on"
 --config waf output redirect/html
 config_waf_output = "html"
 --if config_waf_output ,setting url
-config_waf_redirect_url = "https://www.unixhot.com"
+config_waf_redirect_url = "https://www.funet8.com"
 config_output_html=[[
 <html>
 <head>
@@ -38,7 +38,7 @@ config_output_html=[[
 <title>网站防火墙</title>
 </head>
 <body>
-<h1 align="center"> 欢迎白帽子进行授权安全测试，安全漏洞请联系QQ：1111111。
+<h1 align="center"> 您的访问不符合规定，请稍后再试，或者请联系QQ：401313302。
 </body>
 </html>
 ]]
