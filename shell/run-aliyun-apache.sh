@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ###########################################################
-#名字：	run-aliyun-apache-nginx.sh
-#功能：	自动创建基于CENTOS6的apache+nginx
+#名字：	run-aliyun-apache.sh
+#功能：	自动创建基于CENTOS6的apache
 #作者：	star
 #邮件:	funet8@163.com
 #必须登录阿里云docker仓库！！！！

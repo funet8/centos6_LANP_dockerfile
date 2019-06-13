@@ -23,6 +23,7 @@ cd /data/docker/nginx_conf/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx.conf
 cd /data/docker/nginx_conf/conf.d/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx_main.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/nginx_main.conf
 #启动容器
 docker run -itd --name ${DOCKER_name} \
 --restart always \
