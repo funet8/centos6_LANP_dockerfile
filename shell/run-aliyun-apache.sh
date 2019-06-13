@@ -51,7 +51,7 @@ service iptables save
 systemctl restart iptables.service
 
 ##删除docker
-#rm -rf /data/docker/httpd
+#rm -rf /data/docker/httpd /root/update_docker_web.sh /root/update_docker_web.sh
 #docker rm -f ${DOCKER_httpd}
 
 

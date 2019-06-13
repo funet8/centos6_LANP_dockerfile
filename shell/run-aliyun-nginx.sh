@@ -55,7 +55,7 @@ service iptables save
 systemctl restart iptables.service
 
 ##删除docker
-#rm -rf /data/docker/nginx_conf
+#rm -rf /data/docker/nginx_conf /root/update_docker_web.sh /root/update_docker_web.sh
 #docker rm -f ${DOCKER_nginx}
 
 
