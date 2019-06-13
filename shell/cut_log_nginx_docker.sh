@@ -5,6 +5,13 @@
 #输入：
 #00 00 * * * root /data/conf/shell/cut_log_nginx_docker.sh
 
+###docker的名字
+Nginx_Name="nginx"
+Httpd_Name="centos6_httpd_php56"
+
+#设置日志保存的时间，天
+save_days=60
+
 #set the path to nginx log files
 log_files_path="/data/wwwroot/log/"
 nginx_old_log_path="/data/wwwroot/nginx_old_log/"
@@ -14,8 +21,7 @@ log_files_name=`/bin/ls $log_files_path`
 #设置nginx文件的位置
 #nginx_sbin="/usr/sbin/nginx"
 #nginx_sbin="/data/conf/nginx/sbin/nginx"
-#设置日志保存的时间，天
-save_days=60
+
 
 mkdir -p $log_files_dir
 #移动日志
@@ -26,9 +32,9 @@ done
 #删除过期日志
 find $nginx_old_log_path -mtime +$save_days -exec rm -rf {} \; 
 
-#重启docker
-docker restart dockernginx
-docker restart centos6_httpd_php56
+#重启服务
+docker restart $Nginx_Name
+docker restart $Httpd_Name
 #docker restart myFpm
 
 #/etc/init.d/httpd reload

@@ -53,14 +53,29 @@ sh CentOS6_7_intall_docker.sh
 docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
 ```
 
-## 构建nginx
+## 构建基于docker的nginx
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-nginx.sh
 
 sh run-aliyun-nginx.sh
 ```
 
+## 构建基于docker的httpd
+```
 
+```
+
+
+
+## 切割日志
+
+```
+cd /data/conf/shell/
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/cut_log_nginx_docker.sh
+chmod +x /data/conf/shell/cut_nginx_log.sh
+echo '00 00 * * * root /data/conf/shell/cut_nginx_log.sh' >> /etc/crontab
+systemctl restart crond
+```
 
 
 
