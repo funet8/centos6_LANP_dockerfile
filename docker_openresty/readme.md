@@ -16,7 +16,12 @@ mkdir -p /data/docker/openresty/
 cd /data/docker/openresty/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/docker_openresty/nginx.conf
 cd /data/docker/openresty/conf.d/
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/docker_openresty/
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/docker_openresty/nginx_main.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/Include/Include_Apache_PHP5.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/Include/Include_Backup_PHP5.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/Include/Include_Backup_PHP7.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/Include/Include_Safe.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_Yum_Nginx/Include/Include_Static_File.conf
 
 docker run -itd --name="openresty" \
 --restart always \
@@ -26,7 +31,6 @@ docker run -itd --name="openresty" \
 -v /data/docker/openresty/conf.d:/etc/nginx/conf.d \
 -v /data/wwwroot/:/data/wwwroot/ \
 openresty/openresty
-
 
 ```
 
