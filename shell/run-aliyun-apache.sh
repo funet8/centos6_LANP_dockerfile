@@ -38,13 +38,11 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
 
 ##检查docker-nginx的脚本
 echo "
-DOCKER_httpd=centos6_httpd_php56
 docker exec -it $DOCKER_httpd /bin/bash -c 'nginx -t'
 ">>/root/test_docker_conf.sh
 
 ##重启docker-nginx的脚本
 echo "
-DOCKER_httpd=centos6_httpd_php56
 docker restart $DOCKER_httpd
 " >> /root/update_docker_web.sh
 

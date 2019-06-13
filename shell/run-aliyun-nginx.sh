@@ -41,13 +41,11 @@ registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-nginx:v1
 
 ##检查docker-nginx的脚本
 echo "
-DOCKER_nginx=nginx
 docker exec -it $DOCKER_nginx /bin/bash -c 'nginx -t'
 ">>/root/test_docker_conf.sh
 
 ##重启docker-nginx的脚本
 echo "
-DOCKER_nginx=nginx
 docker restart $DOCKER_nginx
 " >> /root/update_docker_web.sh
 

@@ -56,7 +56,9 @@ docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
 ## 构建基于docker的nginx
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-nginx.sh
-
+需要登录阿里云的docker
+# docker login --username=funet8@163.com registry.cn-shenzhen.aliyuncs.com
+# 输入密码
 sh run-aliyun-nginx.sh
 ```
 
