@@ -11,25 +11,26 @@
 mkdir -p /data/docker/phpfpm7/
 cd /data/docker/phpfpm7/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm7/php-fpm.conf
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm7/php.ini
+#wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm7/php.ini
 
 docker run -itd --name PHP_FPM7 \
--p 5600:9000 \
+-p 7000:9000 \
 --restart always \
 -v /data/wwwroot/web:/data/wwwroot/web \
 -v /data/docker/phpfpm7/php-fpm.conf:/etc/php-fpm.conf \
--v /data/docker/phpfpm7/php.ini:/etc/php.ini \
 -v /etc/localtime:/etc/localtime \
 registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-5.6
 
+#会报错
+#-v /data/docker/phpfpm5/php.ini:/etc/php.ini \
 
 ##保存并重启iptables
 service iptables save
 systemctl restart iptables.service
 
 ##删除docker
-#rm -rf /data/docker/phpfpm5
-#docker rm -f PHP_FPM5
-#docker log -f PHP_FPM5
+#rm -rf /data/docker/phpfpm7
+#docker rm -f PHP_FPM7
+#docker logs -f PHP_FPM7
 
 

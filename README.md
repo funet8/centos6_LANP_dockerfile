@@ -22,14 +22,12 @@ centos7安装 略
 
 ## 新建服务器目录
 ```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh
-sh create_dir.sh
+wget -q -O - https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh | bash -sh
 ```
 
 ## 安装docker
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS6_7_intall_docker.sh
-
 sh CentOS6_7_intall_docker.sh
 ```
 
@@ -39,6 +37,18 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-openresty.sh
 ```
 
+## 构建基于docker的PHP-FPM-5.6
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-PHPFPM5.sh
+sh run-aliyun-PHPFPM5.sh
+
+```
+
+## 构建基于docker的PHP-FPM-7.1
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-PHPFPM7.sh
+sh run-aliyun-PHPFPM7.sh
+```
 
 
 ## 构建基于docker的nginx
@@ -47,14 +57,11 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-nginx.sh
 ```
 
-
-
 ## 构建基于docker的apache2.2-php5.6
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-apache.sh
 sh run-aliyun-apache.sh
 ```
-
 
 
 ## 切割日志
