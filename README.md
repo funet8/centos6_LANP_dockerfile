@@ -26,23 +26,6 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh create_dir.sh
 ```
 
-
-## 安装PHP
-### 安装PHP5.6
-
-```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/centos6_7_intall_php5_6_9.sh
-
-sh centos6_7_intall_php5_6_9.sh
-```
-
-### 安装PHP7.1
-```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/centos6_7_intall_php7_1_5.sh
-
-sh centos6_7_intall_php7_1_5.sh
-```
-
 ## 安装docker
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS6_7_intall_docker.sh
@@ -57,13 +40,13 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-nginx.sh
 ```
 
-## 构建基于docker的openresty
+## 构建基于docker的openresty-WAF
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
 sh run-aliyun-openresty.sh
 ```
 
-## 构建基于docker的httpd
+## 构建基于docker的apache2.2-php5.6
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-apache.sh
 sh run-aliyun-apache.sh
