@@ -19,7 +19,7 @@ docker run -itd --name PHP_FPM7 \
 -v /data/wwwroot/web:/data/wwwroot/web \
 -v /data/docker/phpfpm7/php-fpm.conf:/etc/php-fpm.conf \
 -v /etc/localtime:/etc/localtime \
-registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-5.6
+registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-7.1
 
 #会报错
 #-v /data/docker/phpfpm5/php.ini:/etc/php.ini \
