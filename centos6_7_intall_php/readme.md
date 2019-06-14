@@ -53,9 +53,32 @@ docker push registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-7.1
 ```
 
 
-重新
+重新生产环境
+docker生成phpfpm5.6
 ```
+mkdir -p /data/docker/phpfpm5/
+cd /data/docker/phpfpm5/
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm5/php-fpm.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm5/php.ini
+
 docker run -itd --name PHP_FPM5 \
+-p 5600:9000 \
+--restart always \
+-v /data/wwwroot/web:/data/wwwroot/web \
+-v /data/docker/phpfpm5/php-fpm.conf:/etc/php-fpm.conf \
+-v /data/docker/phpfpm5/php.ini:/etc/php.ini \
+-v /etc/localtime:/etc/localtime \
+registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-5.6
+```
+
+docker生成php-fpm7
+```
+mkdir -p /data/docker/phpfpm7/
+cd /data/docker/phpfpm7/
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm7/php-fpm.conf
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php/docker_conf/phpfpm7/php.ini
+
+docker run -itd --name PHP_FPM7 \
 -p 5600:9000 \
 --restart always \
 -v /data/wwwroot/web:/data/wwwroot/web \
@@ -64,8 +87,6 @@ docker run -itd --name PHP_FPM5 \
 -v /etc/localtime:/etc/localtime \
 registry.cn-shenzhen.aliyuncs.com/funet8/php-fpm-5.6
 ```
-
-
 
 
 

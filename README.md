@@ -33,6 +33,13 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh CentOS6_7_intall_docker.sh
 ```
 
+## 构建基于docker的openresty-WAF
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
+sh run-aliyun-openresty.sh
+```
+
+
 
 ## 构建基于docker的nginx
 ```
@@ -40,11 +47,7 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-nginx.sh
 ```
 
-## 构建基于docker的openresty-WAF
-```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
-sh run-aliyun-openresty.sh
-```
+
 
 ## 构建基于docker的apache2.2-php5.6
 ```
