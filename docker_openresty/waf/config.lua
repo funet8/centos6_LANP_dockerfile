@@ -23,13 +23,13 @@ config_cookie_check = "on"
 --enable/disable cc filtering
 config_cc_check = "on"
 --cc rate the xxx of xxx seconds
-config_cc_rate = "30/60"
+config_cc_rate = "40/60"
 --enable/disable post filtering
 config_post_check = "on"
 --config waf output redirect/html
 config_waf_output = "html"
 --if config_waf_output ,setting url
-config_waf_redirect_url = "https://www.funet8.com"
+config_waf_redirect_url = "https://www.baidu.com"
 config_output_html=[[
 <html>
 <head>
@@ -38,7 +38,7 @@ config_output_html=[[
 <title>网站防火墙</title>
 </head>
 <body>
-<h1 align="center"> 您的访问不符合规定，请稍后再试，或者请联系QQ：401313302。
+<h1 align="center"> 您的访问不符合规定，请稍后再试！</h1>
 </body>
 </html>
 ]]

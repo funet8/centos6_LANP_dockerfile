@@ -38,8 +38,10 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/doc
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/docker_openresty/waf/rule-config/whiteurl.rule
 
 #启动容器
-docker run -itd --name=${DOCKER_openresty} \
+docker run -itd --name=openresty \
 --restart always \
+--link PHP_FPM5  \
+--link PHP_FPM7  \
 -p 80:80 \
 -p 443:443 \
 -v /data/docker/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
