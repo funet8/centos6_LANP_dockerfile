@@ -47,6 +47,7 @@ sh run-aliyun-PHPFPM7.sh
 ## 构建基于docker的openresty-WAF
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
+需要修改是否连接PHPfpm-和数据库
 sh run-aliyun-openresty.sh
 ```
 
