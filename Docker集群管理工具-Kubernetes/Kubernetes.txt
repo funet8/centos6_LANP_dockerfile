@@ -14,3 +14,6 @@ https://www.cnblogs.com/xhyan/p/6655731.html
 
 一、Kubernetes系列之介绍篇
 https://blog.csdn.net/Real_Myth/article/details/78719244
+
+快速安装与配置kubernetes集群搭建
+https://mp.weixin.qq.com/s/DTqjMuDRrwh31gU6sDJasw

@@ -27,7 +27,7 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/cen
 docker run -itd --name centos6mysql \
 --restart always \
 -p 61950:3306 \
--v /data/docker/mysql_conf/my.cnf:/etc/my.conf  \
+-v /data/docker/mysql_conf/my.cnf:/etc/my.cnf  \
 -v /data/docker/mysql_conf/mysql_slowQuery.log:/var/log/mysql/mysql_slowQuery.log \
 -v /data/docker/mysql_docker:/var/lib/mysql \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
