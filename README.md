@@ -25,6 +25,14 @@ centos7安装 略
 wget -q -O - https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh | bash -sh
 ```
 
+## 新建Vsftp服务
+```
+# wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/3-CentOS7.x_Vsftp.sh
+修改参数
+# sh 3-CentOS7.x_Vsftp.sh
+```
+
+
 ## 安装docker
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS6_7_intall_docker.sh
@@ -69,8 +77,8 @@ sh run-aliyun-apache.sh
 ```
 cd /data/conf/shell/
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/cut_log_nginx_docker.sh
-chmod +x /data/conf/shell/cut_nginx_log.sh
-echo '00 00 * * * root /data/conf/shell/cut_nginx_log.sh' >> /etc/crontab
+chmod +x /data/conf/shell/cut_log_nginx_docker.sh
+echo '00 00 * * * root /data/conf/shell/cut_log_nginx_docker.sh' >> /etc/crontab
 systemctl restart crond
 ```
 
