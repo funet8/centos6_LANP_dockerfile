@@ -17,6 +17,7 @@ centos7安装 略
 
 ```
 # wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS7.x_system_init_shell_mini.sh
+修改hostname和端口
 # sh CentOS7.x_system_init_shell_mini.sh
 ```
 
