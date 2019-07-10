@@ -20,6 +20,25 @@ centos7安装 略
 # sh CentOS7.x_system_init_shell_mini.sh
 ```
 
+## 新增挂载硬盘
+```
+# fdisk -l
+# fdisk /dev/vdb
+...
+Command (m for help): n
+Select (default p): p
+Command (m for help): wq
+格式化：
+# mkfs.ext4 /dev/vdb1
+
+# vi /etc/fstab 
+添加：
+/dev/vdb1 /home ext4 defaults 0 0 
+# mount -a
+
+```
+
+
 ## 新建服务器目录
 ```
 wget -q -O - https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh | bash -sh
@@ -43,7 +62,6 @@ sh CentOS6_7_intall_docker.sh
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-PHPFPM5.sh
 sh run-aliyun-PHPFPM5.sh
-
 ```
 
 ## 构建基于docker的PHP-FPM-7.1
@@ -71,6 +89,11 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh run-aliyun-apache.sh
 ```
 
+## 构建基于docker的mysql
+```
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-mysql.sh
+sh run-aliyun-mysql.sh
+```
 
 ## 切割日志
 
@@ -82,6 +105,19 @@ echo '00 00 * * * root /data/conf/shell/cut_log_nginx_docker.sh' >> /etc/crontab
 systemctl restart crond
 ```
 
+## 解决权限问题
+```
+###权限问题的总结
+#在宿主上查看www用户的ID
+## cat /etc/passwd |grep www
+#www:x:1001:1001::/home/www:/sbin/nologin
+#进入docker虚拟机
+## usermod -u 1001 www
+## groupmod -g 1001 www
+#将所需要的目录更改权限
+#chown www.www -R /data/web/dir/
+```
+
 
 ## 重启docker网络
 
@@ -90,23 +126,4 @@ systemctl restart crond
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/docker_net.sh
 sh docker_net.sh
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
