@@ -59,17 +59,6 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 sh CentOS6_7_intall_docker.sh
 ```
 
-## 构建基于docker的PHP-FPM-5.6
-```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-PHPFPM5.sh
-sh run-aliyun-PHPFPM5.sh
-```
-
-## 构建基于docker的PHP-FPM-7.1
-```
-wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-PHPFPM7.sh
-sh run-aliyun-PHPFPM7.sh
-```
 
 ## 构建基于docker的openresty-WAF
 ```
