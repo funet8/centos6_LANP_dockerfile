@@ -64,7 +64,20 @@ sh CentOS6_7_intall_docker.sh
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-openresty.sh
 需要修改是否连接PHPfpm-和数据库
+
 sh run-aliyun-openresty.sh
+
+********************************************
+docker run -itd --name=openresty \
+--restart always \
+-p 80:80 \
+-p 443:443 \
+-v /data/docker/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
+-v /data/docker/openresty/conf.d:/etc/nginx/conf.d \
+-v /data/wwwroot/:/data/wwwroot/ \
+-v /etc/localtime:/etc/localtime \
+registry.cn-shenzhen.aliyuncs.com/funet8/openresty
+
 ```
 
 ## 构建基于docker的nginx
@@ -76,13 +89,33 @@ sh run-aliyun-nginx.sh
 ## 构建基于docker的apache2.2-php5.6
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-apache.sh
+
 sh run-aliyun-apache.sh
+
+********************************************
+docker run -itd --name centos6_httpd_php56 \
+--restart always \
+-p 8080:8080 \
+-v /data/docker/httpd/httpd.conf:/etc/httpd/conf/httpd.conf \
+-v /data/docker/httpd/php.ini:/etc/php.ini  \
+-v /data/docker/httpd/conf.d/:/etc/httpd/conf.d/  \
+-v /data/wwwroot/:/data/wwwroot/ \
+registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
 ```
 
 ## 构建基于docker的mysql
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-mysql.sh
 sh run-aliyun-mysql.sh
+
+docker run -itd --name mysql \
+--restart always \
+-p 61950:3306 \
+-v /data/docker/mysql_conf/my.cnf:/etc/my.cnf  \
+-v /data/docker/mysql_conf/mysql_slowQuery.log:/var/log/mysql/mysql_slowQuery.log \
+-v /data/docker/mysql_docker:/var/lib/mysql \
+registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
+
 ```
 
 ## 切割日志
