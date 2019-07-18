@@ -1,16 +1,14 @@
 #!/bin/bash
-mkdir -p /data/docker/httpd/conf.d/
-cp httpd.conf php.ini /data/docker/httpd/
-cp apache_main.conf /data/docker/httpd/conf.d/
-cp php.conf /data/docker/httpd/conf.d/
 
-docker build -t  funet8/centos6_httpd_php56:v1 .
+docker build -t  funet8/phpfpm73 .
 
 #启动容器
-docker run -itd --name centos6_httpd_php56 \
---restart always -p 8080:8080 \
--v /data/docker/httpd/httpd.conf:/etc/httpd/conf/httpd.conf \
--v /data/docker/httpd/php.ini:/etc/php.ini  \
--v /data/docker/httpd/conf.d/:/etc/httpd/conf.d/  \
+docker run -itd --name phpfpm73 \
+--restart always -p 7300:7300 \
+-v /data/docker/phpfpm73/php-fpm.conf:/etc/php-fpm.conf \
+-v /data/docker/phpfpm73/php.ini:/etc/php.ini  \
 -v /data/wwwroot/:/data/wwwroot/ \
-funet8/centos6_httpd_php56:v1
+funet8/phpfpm73
+
+
+docker run -itd --name test registry.cn-shenzhen.aliyuncs.com/funet8/centos7.2-base:v1

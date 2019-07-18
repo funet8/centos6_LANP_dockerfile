@@ -22,16 +22,14 @@ groupadd $USER
 useradd -g $USER $USER
 
 #安装依赖包
-yum install -y libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
-
-yum -y install gcc gcc-c++
+yum install -y libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel gcc gcc-c++
 
 #新建文件夹######################################################################
 wget -q -O - https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh | bash -sh
 
 #下载tar包-解压######################################################################
 mkdir -p /data/software && cd /data/software
-wget https://www.funet8.com/centos_software/php7.3-software.tar.gz
+wget http://js.funet8.com/centos_software/php7.3-software.tar.gz
 tar -zxf php7.3-software.tar.gz
 
 #升级libzip-devel版本######################################################################
