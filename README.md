@@ -103,6 +103,7 @@ docker run -itd --name centos6_httpd_php56 \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-httpd-php:v5.7
 ```
 
+
 ## 构建基于docker的mysql
 ```
 wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/run-aliyun-mysql.sh
@@ -117,6 +118,15 @@ docker run -itd --name mysql \
 registry.cn-shenzhen.aliyuncs.com/funet8/centos6.9-mariadb:v1
 
 ```
+
+## 宿主机安装php7.3
+```
+端口:7300
+wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/CentOS7_Install_PHP7.3_PHPFPM.sh
+sh CentOS7_Install_PHP7.3_PHPFPM.sh
+
+```
+
 
 ## 切割日志
 
