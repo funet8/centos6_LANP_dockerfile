@@ -45,11 +45,12 @@ Command (m for help): wq
 wget -q -O - https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/create_dir.sh | bash -sh
 ```
 
-## 新建Vsftp服务
+## 新建Vs服务
 ```
 # wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/shell/3-CentOS7.x_Vsftp.sh
 修改参数
 # sh 3-CentOS7.x_Vsftp.sh
+
 ```
 
 
@@ -67,9 +68,11 @@ wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/she
 
 sh run-aliyun-openresty.sh
 
+#启动容器 --link链接mysql容器
 ********************************************
 docker run -itd --name=openresty \
 --restart always \
+--link centos6_httpd_php56 \
 -p 80:80 \
 -p 443:443 \
 -v /data/docker/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \

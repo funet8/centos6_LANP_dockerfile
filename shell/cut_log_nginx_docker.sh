@@ -6,7 +6,7 @@
 #00 00 * * * root /data/conf/shell/cut_log_nginx_docker.sh
 
 ###docker的名字
-Nginx_Name="nginx"
+Nginx_Name="openresty"
 Httpd_Name="centos6_httpd_php56"
 
 #设置日志保存的时间，天
