@@ -129,13 +129,14 @@ cd /data/software/libmemcached-1.0.16
 make && make install
 
 cd /data/software/
-wget http://js.funet8.com/centos_software/php-memcached.tar.gz
-tar -zxf php-memcached.tar.gz
-cd /data/software/php-memcached
+wget http://pecl.php.net/get/memcache-2.2.6.tgz
+#wget http://js.funet8.com/centos_software/memcache-2.2.6.tgz
+tar zxvf memcache-2.2.6.tgz
+cd memcache-2.2.6
 /usr/bin/phpize
-./configure -enable-memcached -with-php-config=/usr/bin/php-config -with-zlib-dir -with-libmemcached-dir=/usr/local/libmemcached -prefix=/usr/local/phpmemcached  --disable-memcached-sasl
-make  -j4
-make install
+./configure --with-php-config=/usr/bin/php-config
+
+make && make install
 
 #安装phpredis扩展
 cd /data/software/
