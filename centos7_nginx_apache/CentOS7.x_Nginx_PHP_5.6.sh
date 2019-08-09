@@ -132,7 +132,7 @@ cd /data/software/
 wget http://pecl.php.net/get/memcache-2.2.6.tgz
 #wget http://js.funet8.com/centos_software/memcache-2.2.6.tgz
 tar zxvf memcache-2.2.6.tgz
-cd memcache-2.2.6
+cd /data/software/memcache-2.2.6
 /usr/bin/phpize
 ./configure --with-php-config=/usr/bin/php-config
 
