@@ -151,7 +151,8 @@ make && make install
 php -m|grep redis
 php -m|grep memcache
 
-#重启所有服务器
+chmod 777 -R /var/lib/php
+#重启nginx和apche服务
 systemctl restart httpd.service
 systemctl restart nginx.service
 
