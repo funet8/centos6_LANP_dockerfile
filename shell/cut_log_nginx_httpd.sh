@@ -32,6 +32,11 @@ done
 #删除过期日志
 find $nginx_old_log_path -mtime +$save_days -exec rm -rf {} \; 
 
+# 如果/data/wwwroot/log/other 不存在则建立这个目录
+if [ ! -d "/data/wwwroot/log/other" ];then
+	mkdir -p /data/wwwroot/log/other
+fi
+
 #重启服务
 systemctl reload $Nginx_Name
 systemctl reload $Httpd_Name
@@ -39,9 +44,4 @@ systemctl reload $Httpd_Name
 
 #/etc/init.d/httpd reload
 #/etc/init.d/nginx reload
-
-# 如果/data/wwwroot/log/other 不存在则建立这个目录
-if [ ! -d "/data/wwwroot/log/other" ];then
-	mkdir -p /data/wwwroot/log/other
-fi
 
