@@ -15,7 +15,7 @@
 
 #PHP_URL=http://ftp.ntu.edu.tw/php/distributions
 #PHP_URL=https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos6_7_intall_php
-PHP_URL=http://www.funet8.com/centos_software
+PHP_URL=http://js.funet8.com/centos_software
 PHP_FILE=php-5.6.9.tar.gz
 PHP_FILE_DIR=php-5.6.9
 PHP_PREFIX=/usr/local/php5.6

@@ -6,6 +6,8 @@
 #	nginx 		yum安装
 #	httpd		yum安装apache2.4
 #	php			yun安装5.6版本
+# wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_nginx_apache/CentOS7.x_Nginx_PHP_5.6.sh
+# sh CentOS7.x_Nginx_PHP_5.6.sh
 # -------------------------------------------------------------------------------
 
 # -------------------------------------------------------------------------------
@@ -50,15 +52,13 @@ mkdir -p /home/data/software/
 yum -y install nginx
 systemctl enable nginx.service
 
-
-#为PHP5取得MySQL支持和安装PHP常用库###################################################
-yum -y install php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt
-
 yum remove -y php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64
 
 #配置epel源
 yum install -y epel-release
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+yum install -y m4 autoconf
 
 #配置remi源
 rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -66,6 +66,8 @@ rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 #安装php5.6.x
 yum install -y --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mcrypt php-mysqlnd php-phpunit-PHPUnit php-pecl-xdebug php-pecl-xhprof
 
+#为PHP5取得MySQL支持和安装PHP常用库###################################################
+yum -y install php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt --enablerepo=remi-php56
 
 #配置文件目录设置######################################################################
 #移动nginx配置文件
@@ -137,6 +139,7 @@ cd /data/software/memcache-2.2.6
 ./configure --with-php-config=/usr/bin/php-config
 
 make && make install
+#/usr/lib64/php/modules/
 
 #安装phpredis扩展
 cd /data/software/
@@ -146,6 +149,15 @@ cd /data/software/phpredis
 /usr/bin/phpize
 ./configure --with-php-config=/usr/bin/php-config
 make && make install
+
+#安装zip扩展
+#cd /data/software/
+#wget http://js.funet8.com/centos_software/zip-1.13.5.tgz
+#tar -zxf zip-1.13.5.tgz
+#cd /data/software/zip-1.13.5
+#/usr/bin/phpize
+#./configure --with-php-config=/usr/bin/php-config
+#make && make install
 
 
 php -m|grep redis
