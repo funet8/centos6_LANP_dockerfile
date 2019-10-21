@@ -10,5 +10,4 @@ docker run -itd --name phpfpm73 \
 -v /data/wwwroot/:/data/wwwroot/ \
 funet8/phpfpm73
 
-
 docker run -itd --name test registry.cn-shenzhen.aliyuncs.com/funet8/centos7.2-base:v1

@@ -164,6 +164,8 @@ php -m|grep redis
 php -m|grep memcache
 
 chmod 777 -R /var/lib/php
+
+rm -rf /usr/share/httpd/icons/*
 #重启nginx和apche服务
 systemctl restart httpd.service
 systemctl restart nginx.service

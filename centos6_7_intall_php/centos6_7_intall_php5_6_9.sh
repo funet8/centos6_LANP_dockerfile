@@ -34,7 +34,7 @@ function install_php {
 yum -y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel
 
 	./configure --prefix=${PHP_PREFIX} \
-	--with-config-file-path=/etc \
+	--with-config-file-path=${PHP_PREFIX}/etc \
 	--enable-fpm \
 	--with-fpm-user=${USER} \
 	--with-fpm-group=${USER} \
@@ -111,7 +111,7 @@ yum -y install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel lib
 function config_php {
 
 	#拷贝配置文件
-	cp ${PHP_PREFIX}/php.ini-production /etc/php.ini
+	cp ${PHP_PREFIX}/php.ini-production ${PHP_PREFIX}/etc/php.ini
 	
 	mv ${PHP_PREFIX}/etc/php-fpm.conf.default ${PHP_PREFIX}/etc/php-fpm.conf
 	

@@ -7,7 +7,7 @@
 ###########################################################
 #上传php7.3-software.tar.gz 到 /data/software
 
-PHP_DIR=/usr/local/php	#php安装路径
+PHP_DIR=/usr/local/php7.3	#php安装路径
 USER=www				#php用户
 PHP_PORT='7300'  		#php-fpm端口
 
@@ -48,12 +48,11 @@ cp /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
 
 #编译安装php7.3######################################################################
 function install_php7 {
-
 		cd /data/software/php7.3-software/php-7.3.7
-
+		
 		./configure \
-		--prefix=${PHP_DIR} \
-		--with-config-file-path=/etc \
+		--prefix=/usr/local/php7.3 \
+		--with-config-file-path=/usr/local/php7.3/etc \
 		--enable-fpm \
 		--with-fpm-user=${USER} \
 		--with-fpm-group=${USER} \
@@ -129,9 +128,10 @@ function install_php7 {
 	}
 #配置环境变量######################################################################
 function config_profile {
-	echo 'export PATH=$PATH:/usr/local/php/bin'>>/etc/profile
+	cp -a /usr/local/php7.3/bin/php /usr/local/php7.3/bin/php7.3
+	echo 'export PATH=$PATH:/usr/local/php7.3/bin'>>/etc/profile	
 	source /etc/profile
-	php -v
+	php7.3 -v
 }
 
 #安装php扩展######################################################################
@@ -140,45 +140,63 @@ function install_kuozhan {
 	cd /data/software/php7.3-software/openssl-1.0.1j/
 	./config
 	make && make install
+	
+	
 	#安装memcache扩展
 	yum install -y libmemcached libmemcached-devel
 	cd /data/software/php7.3-software/libmemcached-1.0.16
-	./configure -prefix=/usr/local/libmemcached -with-memcached 
-	make && make install
-	cd /data/software/php7.3-software/php-memcached/
-	/usr/local/php/bin/phpize
-	./configure -enable-memcached -with-php-config=/usr/local/php/bin/php-config -with-zlib-dir -with-libmemcached-dir=/usr/local/libmemcached -prefix=/usr/local/phpmemcached  --disable-memcached-sasl
-	make  -j4
-	make install
-	#安装phpredis扩展
-	cd /data/software/php7.3-software/phpredis
-	/usr/local/php/bin/phpize
-	./configure --with-php-config=/usr/local/php/bin/php-config
+	./configure
 	make && make install
 	
-	systemctl restart php-fpm
-	php -m|grep redis
-	php -m|grep memcache
+	cd /data/software/php7.3-software/php-memcached/
+	/usr/local/php7.3/bin/phpize
+	./configure -with-php-config=/usr/local/php7.3/bin/php-config
+	make  -j4
+	make install
+	
+	
+	#安装phpredis扩展
+	cd /data/software/php7.3-software/phpredis
+	/usr/local/php7.3/bin/phpize
+	./configure --with-php-config=/usr/local/php7.3/bin/php-config
+	make && make install
+
+	
+	#systemctl restart php-fpm
+	#php -m|grep redis
+	#php -m|grep memcache
 }
 
 #配置php7.3######################################################################
 function config_php {
-	cd /etc/
-	wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php.ini
-	wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php-fpm.conf
-	cd /usr/lib/systemd/system/
-	wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php-fpm.service
+
+	cp /data/software/php7.3-software/php-7.3.7/php.ini-production /usr/local/php7.3/etc/php.ini
+	cp /data/software/php7.3-software/php-7.3.7/sapi/fpm/php-fpm.conf /usr/local/php7.3/etc/php-fpm.conf
+	cp /usr/local/php7.3/etc/php-fpm.d/www.conf.default /usr/local/php7.3/etc/php-fpm.d/www.conf
+	cp /data/software/php7.3-software/php-7.3.7/sapi/fpm/init.d.php-fpm /etc/init.d/php7.3-fpm
+	chmod 755 /etc/init.d/php7.3-fpm
+
+	#修改phpfpm端口
+	sed -i "s/listen \= 127\.0\.0\.1\:9000/listen \= 0\.0\.0\.0\:${PHP_PORT}/g" /usr/local/php7.3/etc/php-fpm.d/www.conf
+	#添加redis、memcached扩展
+	echo 'extension=/usr/local/php7.3/lib/php/extensions/no-debug-non-zts-20180731/redis.so
+extension=/usr/local/php7.3/lib/php/extensions/no-debug-non-zts-20180731/memcached.so'>> /usr/local/php7.3/etc/php.ini
+	/etc/init.d/php7.3-fpm restart
+
+	#开机启动	
+	echo '/etc/init.d/php7.3-fpm start' >> /etc/rc.local 
+
+	#cd /usr/local/php7.3/etc/
+	#wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php.ini
+	#wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php-fpm.conf
+	#cd /usr/lib/systemd/system/
+	#wget https://raw.githubusercontent.com/funet8/centos6_LANP_dockerfile/master/centos7_PHP7.3_PHPFPM/conf/php-fpm.service
 
 	#加入白名单
 	iptables -A INPUT -p tcp --dport ${PHP_PORT} -j ACCEPT
 	service iptables save
 	systemctl restart iptables
-	
-	#开机启动	
-	systemctl enable php-fpm.service
-	systemctl restart php-fpm.service
-	ln /usr/local/php/sbin/php-fpm /usr/local/sbin # 软链接php-fpm
-	
+		
 }
 	
 install_php7
